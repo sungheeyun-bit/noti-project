@@ -145,46 +145,79 @@ export const userContext = createContext();
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
-    const [accessToken, setAccessToken] = useState("");
+   // const [accessToken, setAccessToken] = useState("");
     
-    const [user, setUser] = useState(initialState.user);
-
+   
   const loginHandler = (data) => {
     setIsLogin(true)
-    issueAccessToken(data.data.accessToken);
+    issueAccessToken(data.data.authorityToken);
   };
 
   const issueAccessToken = (token) => {
-    setAccessToken(token);
+   // setAccessToken(token);
+    localStorage.setItem("userToken", token)
+  
   }
+
+  const token = localStorage.getItem("userToken")
 
   const handleLogout = () => {
     setIsLogin(false);
-    setAccessToken("");
+   // setAccessToken("");
+    localStorage.clear()
   }
 
-  const userValue = user 
+  
+
+  
 
   return (
-  <userContext.Provider value={userValue}> 
     <Router>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
         isLogin={isLogin}
-
       />
       <Switch>
         <Route exact path="/login">
           <LoginPage 
             loginHandler={loginHandler}
+            // accessToken={accessToken}
+            // issueAccessToken={issueAccessToken}
+            token={token}
           />
         </Route>
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/:productId" component={DetailProductPage} />
       </Switch>
     </Router>
-  </userContext.Provider>
   );
 }
 export default App;
+
+
+LandingPage
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import Template from "./AlarmListPage/Template";
+import ProductList from "./LandingPage/ProductList";
+import { AlarmProvider } from './AlarmContext';
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: #e9ecef;
+  }
+`;
+function LandingPage() {
+  return (  
+    <div>
+      <h1>랜딩페이지</h1>
+      <AlarmProvider>
+      <GlobalStyle />
+      <Template>
+        <ProductList />
+      </Template>
+      </AlarmProvider>
+    </div>
+    )
+}
+export default LandingPage;
