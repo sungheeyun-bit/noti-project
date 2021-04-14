@@ -11,6 +11,9 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage'
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
 import { initialState } from './assets/state';
 import axios from "axios";
+import LandingPage from "./LandingPage.js";
+import AlarmListPage from './AlarmListPage.js';
+
 
 
 export const ProductsContext = createContext();
@@ -89,6 +92,8 @@ function App() {
           />
         </Route>
         <Route exact path="/signup" component={SignupPage} />
+        <Route path="/" exact={true} component={LandingPage} />
+        <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
