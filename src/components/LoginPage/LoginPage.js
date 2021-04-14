@@ -34,8 +34,6 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
     .then(res => {
       history.push("/");
       loginHandler(res.data)
-      console.log("토큰", token)
-  
     })
     .catch(err => {
       console.log(err);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import SearchBox from "./SearchBox"
 import "../../Navbar.css";
+import axios from "axios";
 
 export default function Navbar({loginHandler, handleLogout, isLogin}){
   const [click, setClick] = useState(false);
@@ -11,6 +12,10 @@ export default function Navbar({loginHandler, handleLogout, isLogin}){
   const handleClick = () => setClick(!click);
 
   const [searchTerm, setSearchTerm] = useState("")
+  
+
+
+
   const updateSearchTerm = (newSearchTerm) => {
     setSearchTerm(newSearchTerm)
   }

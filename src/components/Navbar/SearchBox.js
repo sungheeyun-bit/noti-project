@@ -7,8 +7,10 @@ export default function SearchBox({ updateSearchTerm }){
   const [click, setClick] = useState(false);
 
   const searchHandler = (event) => {
-    setSearchTerm(event.currentTarget.value)
-    updateSearchTerm(event.currentTarget.value)
+    console.log("이벤트", event.target.value)
+    setSearchTerm(event.target.value)
+    updateSearchTerm(event.target.value)
+   // console.log("타겟", event.currentTarget)
   }
   
   const handleClick = () => setClick(!click);
@@ -16,15 +18,18 @@ export default function SearchBox({ updateSearchTerm }){
   return(
     <div>
         <form>
-            <input 
-            type="search" 
+          <input 
+            type="text" 
             className="search-box" 
             placeholder="Search"
             onChange={searchHandler}
             value={searchTerm}
             required
             />
-            <button type="submit" className="fas fa-search"></button>
+            <button 
+              type="submit" 
+              className="fas fa-search"
+              ></button>
           </form>
           <div className="search-icon" onClick={handleClick}>
             <i className="fas fa-search" style={{ fontSize:"1.6rem"}}></i>

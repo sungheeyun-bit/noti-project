@@ -9,7 +9,7 @@ export default function Comments(props) {
 //  const user = useSelector(state => state.user)
   const [comment, setComment] = useState("")
 
-  const user = useContext(userContext)   
+ 
 
   const handleChange = (e) => {
     setComment(e.currentTarget.value)
@@ -21,7 +21,7 @@ export default function Comments(props) {
     // postId는 상위 컴포넌트에서 내려받아야 한다
     const variables = {
       content: comment,
-      writer: user.id,
+      //writer: user.id,
       postId: props.postId
     }
 
