@@ -13,7 +13,7 @@ import { initialState } from './assets/state';
 import axios from "axios";
 import LandingPage from "./LandingPage.js";
 import AlarmListPage from './AlarmListPage.js';
-
+import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 
 
 export const ProductsContext = createContext();
@@ -89,15 +89,20 @@ function App() {
         <Route exact path="/login">
           <LoginPage 
             loginHandler={loginHandler}
-          />
+          /> 
         </Route>
         <Route exact path="/signup" component={SignupPage} />
+        <Route exact path="/product/upload" component={UploadProdctPage} />
+
         <Route path="/" exact={true} component={LandingPage} />
         <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
-        <Route exact path="/product/:productId" component={DetailProductPage} />
+        {/* <Route exact path="/product/:productId" component={DetailProductPage} /> */}
+        <Route path="/product/:productId">
+          <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+        </Route> 
       </Switch>
     </Router>
   );

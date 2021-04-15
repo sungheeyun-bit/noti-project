@@ -27,8 +27,9 @@ export default function DetailProductPage(props) {
     
     
   //   axios
-  //     .get(`/product/product_id?id=${productId}&type=single`)
+  //     .get(`/product/detailProduct?id=${productId}&type=single`)
   //       .then(response => {
+  //         console.log("상세페이지", response)
   //         if(response.data.success){
   //           console.log('res.data', response.data)
   //           setProduct(response.data.product[0])
@@ -37,12 +38,14 @@ export default function DetailProductPage(props) {
   //         }
   //       })
 
+  //     }, [])
+
   //   axios
   //     .get(`/product/comment`)
   //       .then(response => {
   //         if(response.data.success){
   //           console.log('res.data', response.data)
-  //           setCommentLists (response.data.comment)
+  //           setCommentLists(response.data.comment)
   //         } else {
   //           alert('상세 정보 가져오기를 실패했습니다')
   //         }
@@ -106,7 +109,11 @@ export default function DetailProductPage(props) {
         ))
       }
     </div>
-    <Comments commentLists={commentLists} postId={product.id} updateComment={updateComment} />
+    <Comments 
+      commentLists={commentLists} 
+      productId={product.id} 
+      accessToken={props.accessToken}
+      updateComment={updateComment} />
   </>
    
   )
