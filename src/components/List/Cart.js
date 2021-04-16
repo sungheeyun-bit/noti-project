@@ -4,21 +4,15 @@ import styled, { css } from 'styled-components';
 import { ImBell, ImBin2 } from 'react-icons/im';
 import { Button, Switch } from 'antd';
 import ProductContext from "../Context/ProductContext";
-import MainNavigation from "../components/MainNavigation";
-import Tooltip from "../LandingPage/Tooltip";
+import MainNavigation from "../MainNavigation";
+// import { removeProductFromCart } from '../store/actions';
 import "./Cart.css";
 
 const CartPage = props => {
   const context = useContext(ProductContext);
-
   useEffect(() => {
     console.log(context);
   }, []);
-
-  function onChange(checked) {
-    console.log(`switch to ${checked}`);
-  }
-
   return (
     <React.Fragment>
       <MainNavigation
@@ -26,10 +20,7 @@ const CartPage = props => {
           return count + curItem.quantity;
         }, 0)}
       />
-      <h1>3일뒤</h1>
-      <h2>나이키 조던 1 발매 됩니다.</h2>
-      <span>알림 설정 0개 완료</span>
-      {/* <span>알림 설정 {doneTasks.length}개 완료</span> */}
+      {/* <Headline /> */}
       <main className="cart">
         {context.cart.length <= 0 && <p>저장된 알림 리스트가 없어요!</p>}
         <ul>
@@ -40,19 +31,15 @@ const CartPage = props => {
                 {/* ({cartItem.quantity}) */}
               </div>
               <div>
-              <Tooltip>
-              <Switch
-              onClick={context.alarmSetting.bind(this,cartItem.done)}
-              >
+              <Button> 
+                {/* done={done} onClick={onChange}>{done && <ImBell />} */}
                 알림 설정
-              </Switch>
-              </Tooltip>
+              </Button>
                 <Button
                   onClick={context.removeProductFromCart.bind(this,cartItem.id)}
                 >
                   삭제
                 </Button>
-
               </div>
             </li>
           ))}
@@ -61,5 +48,4 @@ const CartPage = props => {
     </React.Fragment>
   );
 };
-
 export default CartPage;

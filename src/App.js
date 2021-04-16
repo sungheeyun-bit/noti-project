@@ -9,43 +9,32 @@ import SignupPage from './components/SignupPage/SignupPage';
 import Navbar from './components/Navbar/Navbar';
 import DetailProductPage from './components/DetailProductPage/DetailProductPage';
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
-// import { initialState } from './assets/state';
+import { initialState } from './assets/state';
 import axios from "axios";
 import LandingPage from "./LandingPage.js";
 import AlarmListPage from './AlarmListPage.js';
-import GlobalState from "./Context/GlobalState";
-import ProductsPage from "./List/Products";
-import CartPage from "./List/Cart";
-
-
-
+import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
+import GlobalState from "./components/Context/GlobalState";
+import ProductsPage from "./components/List/Products";
+import CartPage from "./components/List/Cart";
 export const ProductsContext = createContext();
-
 axios.defaults.withCredentials = true;
-
-function App () {
+function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-    
    // const [products, setProducts] = useState([]);
-   
   const loginHandler = (data) => {
     setIsLogin(true)
     issueAccessToken(data.data);
   };
-
-  
-
   const issueAccessToken = (token) => {
    setAccessToken(token);
    console.log("토큰", token)  
   }
-
   const handleLogout = () => {
     setIsLogin(false);
     setAccessToken("");
   }
-  
   // useEffect(() => {
   //   axios.get("https://localhost:4000/products/productList", {
   //     headers: {
@@ -57,18 +46,11 @@ function App () {
   //     setProducts(res.data)
   //   })
   // }, [])
-   
-
   //landingpage
   // const [products, setProducts] = useState([]);
-
-
   // useEffect(() => {
   //  searchProducts()
-
   // }, [])
-
-
   // const searchProducts = (newSearchTerm) => {
   //   axios.get("https://localhost:4000/products/",{
   //     headers: {
@@ -80,7 +62,6 @@ function App () {
   //     setProducts(res.data)
   //   })
   // }
-
   return (
     <Router>
       <Navbar 
@@ -90,27 +71,24 @@ function App () {
       />
       <Switch>
         <Route exact path="/login">
-          <LoginPage 
-            loginHandler={loginHandler}
-          />
+          <LoginPage loginHandler={loginHandler} /> 
         </Route>
-        <GlobalState>
-        <Route path="/" component={ProductsPage} exact />
-        <Route path="/cart" component={CartPage} exact />
-        </GlobalState>
         <Route exact path="/signup" component={SignupPage} />
-        <Route path="/" exact={true} component={LandingPage} />
+        <Route exact path="/product/upload" component={UploadProdctPage} />
+        {/* <Route path="/" exact={true} component={LandingPage} /> */}
         <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
-        <Route exact path="/product/:productId" component={DetailProductPage} />
+        <Route 
+          path="/product/:productId" 
+          render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
+        <GlobalState> 
+        <Route path="/" component={ProductsPage} exact />
+        <Route path="/cart" component={CartPage} exact />
+        </GlobalState>
       </Switch>
     </Router>
   );
 }
 export default App;
-
-
-
-

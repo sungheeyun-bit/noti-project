@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import { Button } from 'antd';
 import axios from "axios"
 // import { connect } from 'react-redux';
 import ProductContext from "../Context/ProductContext";
-import MainNavigation from "../components/MainNavigation";
+import MainNavigation from "../MainNavigation";
 // import { addProductToCart } from '../store/actions';
 import "./Products.css";
-
 const ProductsPage = props => {
-
-  const [products, setProducts] = useState([]);
-  const context = useContext(ProductContext);
-    
   useEffect(() => {
     axios.get("https://localhost:4000/products/productList", {
       headers: {
@@ -20,15 +15,18 @@ const ProductsPage = props => {
       }
     })
     .then((res) => {
-      console.log("제품들", res.data[0])
-      setProducts(res.data[0])
+      console.log("제품들", res.data)
+      setProducts(res.data)
     })
   }, [])
-
+   const [products, setProducts] = useState([]);
+    const context = useContext(ProductContext);
+    useEffect(() => {
+    console.log(context);
+    }, []);
    const [click, setClick] = useState(false);
    const history = useHistory();
    const handleClick = () => setClick(!click);
-
   return (
     <ProductContext.Consumer>
       {context => (
@@ -43,7 +41,7 @@ const ProductsPage = props => {
               {context.products.map(product => (
                 <li key={product.id}>
                   <div>
-                    <strong>{product.releaseString}</strong> - {product.productName}
+                    <strong>{product.date}</strong> - {product.productname}
                   </div>
                   <div>
                     <Button
@@ -53,7 +51,7 @@ const ProductsPage = props => {
                     </Button>
                     <Link
                     exact
-                    to="/product/:productId"
+                    to={`/product/${product.id}`}
                     onClick={handleClick}>
                         상세정보 확인하기
                     </Link>
@@ -67,7 +65,6 @@ const ProductsPage = props => {
     </ProductContext.Consumer>
   );
 };
-
 // const mapStateToProps = state => {
 //   return {
 //     products: state.products,
@@ -76,11 +73,9 @@ const ProductsPage = props => {
 //     }, 0)
 //   };
 // };
-
 // const mapDispatchToProps = dispatch => {
 //   return {
 //     addProductToCart: product => dispatch(addProductToCart(product))
 //   };
 // };
-
-export default ProductsPage;
+export default withRouter(ProductsPage);

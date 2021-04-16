@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function LikeDislikes() {
+
+
+  useEffect(() => {
+    
+ 
+    const variable = {
+      commentId: ,
+      nickName
+    }
+
+
+
+  })
+
   return (
     <div>
-      like, dislike
+      <i class="fas fa-thumbs-up"></i>
+      <i class="far fa-thumbs-up"></i>
     </div>
   )
 }

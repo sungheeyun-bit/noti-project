@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 import "./MainNavigation.css";
-
 const mainNavigation = props => (
   <header className="main-navigation">
     <nav>
@@ -17,5 +15,4 @@ const mainNavigation = props => (
     </nav>
   </header>
 );
-
 export default mainNavigation;

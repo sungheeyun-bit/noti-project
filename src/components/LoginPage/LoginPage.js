@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import GoogleLogin from "react-google-login";
 import axios from 'axios';
 import swal from "sweetalert";
@@ -36,7 +36,8 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
       loginHandler(res.data)
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.message);
+      alert(err.message)
     })
   }
 
@@ -71,6 +72,7 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
           이메일로 시작하기
           </button>
         </div>
+       </form>   
           {/* <div>
           <GoogleLogin
             className="btn-google"
@@ -81,7 +83,12 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
             cookiePolicy={"single_host_origin"}
           />
         </div> */}
-      </form>      
+        <div className="link-singup">
+          <span>아직 계정이 없으신가요?</span>
+          <Link to="/signup" style={{color:"black", textDecoration:"none"}}>
+          👉 회원가입하기
+          </Link>          
+        </div>    
     </div>
   )
 }

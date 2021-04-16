@@ -49,7 +49,7 @@ import { Input, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import "../../SearchBox.css"
 
-function SearchBox () {
+export default function SearchBox () {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -112,6 +112,38 @@ function SearchBox () {
     );
   }
 
+//   export default SearchBox;
+//   const searchHandler = (event) => {
+//     console.log("이벤트", event.target.value)
+//     setSearchTerm(event.target.value)
+//     updateSearchTerm(event.target.value)
+//   }
+  
+//   const handleClick = () => setClick(!click);
+
+//   return(
+//     <div>
+//         <form>
+//           <input 
+//             type="text" 
+//             className="search-box" 
+//             placeholder="Search"
+//             onChange={searchHandler}
+//             value={searchTerm}
+//             required
+//             />
+//             <button 
+//               type="submit" 
+//               className="fas fa-search"
+//               onClick={searchHandler}
+//               ></button>
+//           </form>
+//           <div className="search-icon" onClick={handleClick}>
+//             <i className="fas fa-search" style={{ fontSize:"1.6rem"}}></i>
+//           </div>
+//     </div>
+//   )
+// }
 
 
-  export default SearchBox;
+
