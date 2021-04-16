@@ -120,7 +120,7 @@ function AlarmItem({ id, img, done, date, productname }) {
       <ProductName done={done}>{productname}</ProductName>
       <Button done={done} onClick={onChange}>{done && <ImBell />}</Button>
       <AlarmButton handlClick={() => handlOpenModal(true)}>
-        알림 설정
+        알림 받기
       </AlarmButton>
       <Modal isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
         <ModalContent>

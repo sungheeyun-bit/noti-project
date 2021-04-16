@@ -19,9 +19,9 @@ function AlarmList() {
         <AlarmItem
           key={alarm.id}
           id={alarm.id}
-          img={alarm.img}
-          date={alarm.date}
-          productname={alarm.productname}
+          // img={alarm.img}
+          // date={alarm.date}
+          // productname={alarm.productname}
           done={alarm.done}
         />
       ))}

@@ -24,28 +24,28 @@ const initialList = [
     img: "../../IMG/조던1.jpeg",
     date: '04월 30일 발매',
     productname: "조던1",
-    done: false
+    done: true
   },
   {
     id: 2,
     img: "../../IMG/조던1.jpeg",
     date: '05월 30일 발매',
     productname: "조던1",
-    done: false
+    done: true
   },
   {
     id: 3,
     img: "../../IMG/조던1.jpeg",
     date: '06월 30일 발매',
     productname: "조던1",
-    done: false
+    done: true
   },
   {
     id: 4,
     img: "../../IMG/조던1.jpeg",
     date: '07월 28일 발매',
     productname: "조던1",
-    done: false
+    done: true
   }
 ];
 

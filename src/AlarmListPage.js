@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Template from "./AlarmListPage/Template";
 import Headline from "./AlarmListPage/Headline";
 import AlarmList from "./AlarmListPage/AlarmList";
+import Cart from "./List/Cart"
 // import { ProductsProvider } from './AlarmContext';
 import { AlarmProvider } from './AlarmContext';
 
@@ -15,13 +16,13 @@ const GlobalStyle = createGlobalStyle`
 function AlarmListPage() {
   return (  
     <div>
-      <h1>알림 리스트 페이지</h1>
       <AlarmProvider>
       {/* <ProductsProvider> */}
       <GlobalStyle />
       <Template>
         <Headline />
         <AlarmList />
+        <Cart />
       </Template>
       {/* </ProductsProvider> */}
       </AlarmProvider>

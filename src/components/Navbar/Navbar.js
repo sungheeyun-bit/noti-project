@@ -12,10 +12,6 @@ export default function Navbar({ updateSearchTerm, loginHandler, handleLogout, i
   const handleClick = () => setClick(!click);
 
   // const [searchTerm, setSearchTerm] = useState("")
-  
-
-
-
   // const updateSearchTerm = (newSearchTerm) => {
   //   setSearchTerm(newSearchTerm)
   // }
@@ -42,7 +38,12 @@ export default function Navbar({ updateSearchTerm, loginHandler, handleLogout, i
                 >
                   발매정보리스트
                 </Link>
-              </li>  
+              </li>
+              {/* <li>
+                <Link 
+                to="/cart">Cart ({props.cartItemNumber})
+                </Link>
+              </li> */}
               <li className="nav-item">
                 <Link exact to="/"
                   activeClassName="active"

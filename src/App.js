@@ -17,34 +17,24 @@ import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 import GlobalState from "./components/Context/GlobalState";
 import ProductsPage from "./components/List/Products";
 import CartPage from "./components/List/Cart";
-
 export const ProductsContext = createContext();
-
 axios.defaults.withCredentials = true;
-
 function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-    
    // const [products, setProducts] = useState([]);
-   
   const loginHandler = (data) => {
     setIsLogin(true)
     issueAccessToken(data.data);
   };
-
-  
-
   const issueAccessToken = (token) => {
    setAccessToken(token);
    console.log("토큰", token)  
   }
-
   const handleLogout = () => {
     setIsLogin(false);
     setAccessToken("");
   }
-  
   // useEffect(() => {
   //   axios.get("https://localhost:4000/products/productList", {
   //     headers: {
@@ -56,18 +46,11 @@ function App() {
   //     setProducts(res.data)
   //   })
   // }, [])
-   
-
   //landingpage
   // const [products, setProducts] = useState([]);
-
-
   // useEffect(() => {
   //  searchProducts()
-
   // }, [])
-
-
   // const searchProducts = (newSearchTerm) => {
   //   axios.get("https://localhost:4000/products/",{
   //     headers: {
@@ -79,7 +62,6 @@ function App() {
   //     setProducts(res.data)
   //   })
   // }
-
   return (
     <Router>
       <Navbar 
@@ -109,10 +91,4 @@ function App() {
     </Router>
   );
 }
-
-
 export default App;
-
-
-
-
