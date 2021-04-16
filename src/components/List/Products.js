@@ -8,6 +8,8 @@ import MainNavigation from "../MainNavigation";
 // import { addProductToCart } from '../store/actions';
 import "./Products.css";
 
+
+
 const ProductsPage = props => {
   useEffect(() => {
     axios.get("https://localhost:4000/products/productList", {
@@ -30,6 +32,12 @@ const ProductsPage = props => {
    const [click, setClick] = useState(false);
    const history = useHistory();
    const handleClick = () => setClick(!click);
+
+  
+
+ 
+
+
   return (
     <ProductContext.Consumer>
       {context => (
@@ -52,16 +60,12 @@ const ProductsPage = props => {
                     >
                       발매 상품 저장
                     </Button>
-                    {/* <Link
+                    <Link
                     exact
                     to={`/product/${product.id}`}
                     onClick={handleClick}>
                         상세정보 확인하기
-                    </Link> */}
-                    <a href ={`/product/${product.id}`}
-                    onClick={handleClick}>
-                        상세정보 확인하기
-                    </a>                    
+                    </Link>
                   </div>
                 </li>
               ))}

@@ -36,7 +36,8 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
       loginHandler(res.data)
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.message);
+      alert(err.message)
     })
   }
 

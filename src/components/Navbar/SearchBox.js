@@ -10,7 +10,6 @@ export default function SearchBox({ updateSearchTerm }){
     console.log("이벤트", event.target.value)
     setSearchTerm(event.target.value)
     updateSearchTerm(event.target.value)
-   // console.log("타겟", event.currentTarget)
   }
   
   const handleClick = () => setClick(!click);
@@ -29,6 +28,7 @@ export default function SearchBox({ updateSearchTerm }){
             <button 
               type="submit" 
               className="fas fa-search"
+              onClick={searchHandler}
               ></button>
           </form>
           <div className="search-icon" onClick={handleClick}>
@@ -37,4 +37,6 @@ export default function SearchBox({ updateSearchTerm }){
     </div>
   )
 }
-// 온클릭되면 토글나오게 코드작성해야함
+
+
+

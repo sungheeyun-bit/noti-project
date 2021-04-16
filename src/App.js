@@ -89,9 +89,7 @@ function App() {
       />
       <Switch>
         <Route exact path="/login">
-          <LoginPage 
-            loginHandler={loginHandler}
-          /> 
+          <LoginPage loginHandler={loginHandler} /> 
         </Route>
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
@@ -100,14 +98,9 @@ function App() {
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
-        {/* <Route exact path="/product/:productId" component={DetailProductPage} /> */}
-        {/* <Route path="/product/:productId">
-          <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
-        </Route>  */}
         <Route 
           path="/product/:productId" 
           render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
-          {/* <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} />          */}
         <GlobalState> 
         <Route path="/" component={ProductsPage} exact />
         <Route path="/cart" component={CartPage} exact />
@@ -116,6 +109,8 @@ function App() {
     </Router>
   );
 }
+
+
 export default App;
 
 

@@ -60,7 +60,7 @@ export default function FileUpload({ updateImages }) {
         {images.map((image, index) => (
           <div onClick={()=> deleteHandler(image)} key={index}>
             <img style={{ minWidth: '300px', width:'300px', height: '240px' }}
-                 src={`https://localhost:5000/${image}`} />
+                 src={`https://localhost:4000/${image}`} />
           </div>
         ))}
 
