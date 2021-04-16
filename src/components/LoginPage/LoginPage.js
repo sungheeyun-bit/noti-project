@@ -1,0 +1,88 @@
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import GoogleLogin from "react-google-login";
+import axios from 'axios';
+import swal from "sweetalert";
+
+axios.defaults.withCredentials = true;
+ 
+export default function LoginPage({ loginHandler,issueAccessToken, accessToken, token }) {
+  
+  const [details, setDetails] = useState({email: "", password: ""})
+
+  const history = useHistory();
+
+  const submitHandler = (e) =>{
+    e.preventDefault();
+ 
+    const { email, password } = details;
+
+    if(!email || !password){
+      return swal("Oops", "모든 항목은 필수입니다.", "error");
+    }
+
+    axios.post("https://localhost:4000/users/login", 
+    {
+      email,
+      password
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(res => {
+      history.push("/");
+      loginHandler(res.data)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+
+  return (
+
+    <div className="container">
+      <h2>Log in</h2>
+      <form onSubmit={submitHandler}>
+        <div className="email-form">
+          📧 이메일
+          <input 
+            className="input"
+            type="text"
+            placeholder="이메일을 입력해주세요."
+            value={details.email}
+            onChange={(e) => setDetails({...details, email: e.target.value})}
+          />
+        </div>
+        <div className="password-form">
+          🔐 비밀번호
+          <input 
+            className="input"
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            value={details.password}
+            onChange={(e) => setDetails({...details, password: e.target.value})}
+          />
+        </div>
+        <div>
+          <button className="btn-signin" onClick={submitHandler}>
+          이메일로 시작하기
+          </button>
+        </div>
+          {/* <div>
+          <GoogleLogin
+            className="btn-google"
+            clientId="996092186048-291mg21lf890quda77fdgrqn11il9c0h.apps.googleusercontent.com"
+            buttonText="구글 계정으로 시작하기"
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div> */}
+      </form>      
+    </div>
+  )
+}
+
