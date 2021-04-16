@@ -8,6 +8,8 @@ import MainNavigation from "../MainNavigation";
 // import { addProductToCart } from '../store/actions';
 import "./Products.css";
 
+
+
 const ProductsPage = props => {
   useEffect(() => {
     axios.get("https://localhost:4000/products/productList", {
@@ -30,6 +32,12 @@ const ProductsPage = props => {
    const [click, setClick] = useState(false);
    const history = useHistory();
    const handleClick = () => setClick(!click);
+
+  
+
+ 
+
+
   return (
     <ProductContext.Consumer>
       {context => (

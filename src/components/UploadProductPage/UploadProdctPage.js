@@ -57,7 +57,7 @@ export default function UploadProdctPage() {
 
     axios.post("https://localhost:4000/products/testadd", body)
       .then(response =>{
-        console.log("add", response.data)
+        console.log("add", response)
         if(response.data.success){
         
           alert('상품 업로드에 성공 했습니다')
@@ -98,7 +98,7 @@ export default function UploadProdctPage() {
       <Input onChange={priceChangeHandler} value={price}/>
       <br /> 
       <br />
-      <Button type="submit">확인</Button>
+      <Button type="submit" onClick={submitHandler}>확인</Button>
     </Form>
 
     </div>

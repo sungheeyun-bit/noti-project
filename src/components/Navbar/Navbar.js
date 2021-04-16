@@ -4,21 +4,21 @@ import SearchBox from "./SearchBox"
 import "../../Navbar.css";
 import axios from "axios";
 
-export default function Navbar({loginHandler, handleLogout, isLogin}){
+export default function Navbar({ updateSearchTerm, loginHandler, handleLogout, isLogin}){
   const [click, setClick] = useState(false);
 
   const history = useHistory();
 
   const handleClick = () => setClick(!click);
 
-  const [searchTerm, setSearchTerm] = useState("")
+  // const [searchTerm, setSearchTerm] = useState("")
   
 
 
 
-  const updateSearchTerm = (newSearchTerm) => {
-    setSearchTerm(newSearchTerm)
-  }
+  // const updateSearchTerm = (newSearchTerm) => {
+  //   setSearchTerm(newSearchTerm)
+  // }
 
   return(
     <>
