@@ -13,8 +13,10 @@ import { initialState } from './assets/state';
 import axios from "axios";
 import LandingPage from "./LandingPage.js";
 import AlarmListPage from './AlarmListPage.js';
-
-
+import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
+import GlobalState from "./components/Context/GlobalState";
+import ProductsPage from "./components/List/Products";
+import CartPage from "./components/List/Cart";
 
 export const ProductsContext = createContext();
 
@@ -89,15 +91,27 @@ function App() {
         <Route exact path="/login">
           <LoginPage 
             loginHandler={loginHandler}
-          />
+          /> 
         </Route>
         <Route exact path="/signup" component={SignupPage} />
-        <Route path="/" exact={true} component={LandingPage} />
+        <Route exact path="/product/upload" component={UploadProdctPage} />
+        {/* <Route path="/" exact={true} component={LandingPage} /> */}
         <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
-        <Route exact path="/product/:productId" component={DetailProductPage} />
+        {/* <Route exact path="/product/:productId" component={DetailProductPage} /> */}
+        {/* <Route path="/product/:productId">
+          <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+        </Route>  */}
+        <Route 
+          path="/product/:productId" 
+          render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
+          {/* <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} />          */}
+        <GlobalState> 
+        <Route path="/" component={ProductsPage} exact />
+        <Route path="/cart" component={CartPage} exact />
+        </GlobalState>
       </Switch>
     </Router>
   );
