@@ -52,16 +52,12 @@ const ProductsPage = props => {
                     >
                       발매 상품 저장
                     </Button>
-                    {/* <Link
+                    <Link
                     exact
                     to={`/product/${product.id}`}
                     onClick={handleClick}>
                         상세정보 확인하기
-                    </Link> */}
-                    <a href ={`/product/${product.id}`}
-                    onClick={handleClick}>
-                        상세정보 확인하기
-                    </a>                    
+                    </Link>
                   </div>
                 </li>
               ))}

@@ -16,34 +16,30 @@ import '../../DetailProductPage.css';
 // 하나의 상품정보만 가져오기 때문에 type single로!
 
 
-
-
-
 export default function DetailProductPage(props) {
   
   console.log('props가 뭐니', props)
-const productId = props.match.params.productId
+// const productId = props.match.params.productId
   
-const [product, setProduct] = useState({})
+// const [product, setProduct] = useState({})
 // const [commentLists, setCommentLists] = useState([])
 
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    
-    axios
-      .get(`/product/detailProduct?id=${productId}&type=single`)
-        .then(response => {
-          console.log("상세페이지", response.data)
-          if(response.data.success){
-            console.log('res.data', response.data)
-            setProduct(response.data.product[0])
-          } else {
-            alert('상세 정보 가져오기를 실패했습니다')
-          }
-        })
+  //   axios
+  //     .get(`/product/detailProduct?id=${productId}&type=single`)
+  //       .then(response => {
+  //         console.log("상세페이지", response.data)
+  //         if(response.data.success){
+  //           console.log('res.data', response.data)
+  //           setProduct(response.data.product[0])
+  //         } else {
+  //           alert('상세 정보 가져오기를 실패했습니다')
+  //         }
+  //       })
 
-      }, [])
+  //     }, [])
 
   //   axios
   //     .get(`/product/comment`)
@@ -58,7 +54,7 @@ const [product, setProduct] = useState({})
   // }, [])
 
 
- // const [product, setProducts] = useState(initialState.product);
+  const [product, setProducts] = useState(initialState.product);
   const [commentLists, setCommentLists] = useState([])
   const [index, setIndex] = useState(0)
 

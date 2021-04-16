@@ -10,7 +10,6 @@ export default function SearchBox({ updateSearchTerm }){
     console.log("이벤트", event.target.value)
     setSearchTerm(event.target.value)
     updateSearchTerm(event.target.value)
-   // console.log("타겟", event.currentTarget)
   }
   
   const handleClick = () => setClick(!click);
