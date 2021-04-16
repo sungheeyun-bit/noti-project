@@ -6,7 +6,6 @@ axios.defaults.withCredentials = true;
 
 export default function FileUpload({ updateImages }) {
 
-
   const [images, setImages] = useState([])
  
   const dropHandler = (files) => {
@@ -17,10 +16,10 @@ export default function FileUpload({ updateImages }) {
     }
     formData.append("file", files[0])
  
-    axios.post('/product/image', formData, config)
+    axios.post('https://localhost:4000/products/image', formData, config)
       .then(response => {
         if(response.data.success){
-           console.log(response.data)
+           console.log("사진업로드", response.data)
            setImages([...images, response.data.filePath])
            updateImages([...images, response.data.filePath])
           }else {
@@ -28,6 +27,7 @@ export default function FileUpload({ updateImages }) {
         }
       })
   }
+
 
 
   const deleteHandler = (image) => {
@@ -42,8 +42,7 @@ export default function FileUpload({ updateImages }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between'}}>
       <Dropzone onDrop={dropHandler}>
-        {({getRootProps, getInputProps}) => (
-        
+        {({getRootProps, getInputProps}) => (        
             <div 
               style={{
                 width: 300, height: 240, border: '1px solid lightgray',

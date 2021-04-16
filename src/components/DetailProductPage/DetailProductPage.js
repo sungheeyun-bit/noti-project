@@ -15,30 +15,35 @@ import '../../DetailProductPage.css';
 // params(/about/:name형식)정보를 가지고있다
 // 하나의 상품정보만 가져오기 때문에 type single로!
 
+
+
+
+
 export default function DetailProductPage(props) {
   
-  // const productId = props.match.params.productId
+  console.log('props가 뭐니', props)
+const productId = props.match.params.productId
   
-  // const [product, setProduct] = useState({})
-  // const [commentLists, setCommentLists] = useState([])
+const [product, setProduct] = useState({})
+// const [commentLists, setCommentLists] = useState([])
 
 
-  // useEffect(() => {
+  useEffect(() => {
     
     
-  //   axios
-  //     .get(`/product/detailProduct?id=${productId}&type=single`)
-  //       .then(response => {
-  //         console.log("상세페이지", response)
-  //         if(response.data.success){
-  //           console.log('res.data', response.data)
-  //           setProduct(response.data.product[0])
-  //         } else {
-  //           alert('상세 정보 가져오기를 실패했습니다')
-  //         }
-  //       })
+    axios
+      .get(`/product/detailProduct?id=${productId}&type=single`)
+        .then(response => {
+          console.log("상세페이지", response.data)
+          if(response.data.success){
+            console.log('res.data', response.data)
+            setProduct(response.data.product[0])
+          } else {
+            alert('상세 정보 가져오기를 실패했습니다')
+          }
+        })
 
-  //     }, [])
+      }, [])
 
   //   axios
   //     .get(`/product/comment`)
@@ -53,7 +58,7 @@ export default function DetailProductPage(props) {
   // }, [])
 
 
-  const [product, setProducts] = useState(initialState.product);
+ // const [product, setProducts] = useState(initialState.product);
   const [commentLists, setCommentLists] = useState([])
   const [index, setIndex] = useState(0)
 
@@ -71,11 +76,10 @@ export default function DetailProductPage(props) {
     }
     images[index].className = "active";
   }
-  
-  
+    
   return (
   <>
-    <div className="detail-wrapper">
+    {/* <div className="detail-wrapper">
       {
         product.map(item => (
           <div className="details" key={item.id}>
@@ -108,14 +112,35 @@ export default function DetailProductPage(props) {
           </div>
         ))
       }
+    </div> */}
+        <div className="detail-wrapper">
+      {
+        product.map(item => (
+          <div className="details" key={item.id}>
+            <div className="info">
+              <div className="row">
+                 <h2>{item.productName}</h2>
+                  <i class="far fa-bell"></i>
+              </div>
+              <div className="row">
+                <span>발매일</span> 
+                <span style={{fontWeight:"500"}}>{item.releaseDate}</span> 
+              </div>
+              <div className="row">
+                <span>발매가격</span>  
+                <span style={{fontWeight:"500"}}>KRW {item.price}</span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
     <Comments 
       commentLists={commentLists} 
       productId={product.id} 
       accessToken={props.accessToken}
       updateComment={updateComment} />
-  </>
-   
+  </>   
   )
 }
 

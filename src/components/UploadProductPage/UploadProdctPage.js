@@ -55,15 +55,19 @@ export default function UploadProdctPage() {
       images:images
     }
 
-    axios.post("/product", body)
+    axios.post("https://localhost:4000/products/testadd", body)
       .then(response =>{
+        console.log("add", response.data)
         if(response.data.success){
+        
           alert('상품 업로드에 성공 했습니다')
         } else {
           alert('상품 업로드에 실패 했습니다')
         }
       })
   }
+
+  // 2020-04-18T15:00:00.000Z
 
 
   return (
