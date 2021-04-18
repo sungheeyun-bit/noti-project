@@ -11,16 +11,11 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage'
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
 import { initialState } from './assets/state';
 import axios from "axios";
-
-
 import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
-import GlobalState from "./components/Context/GlobalState";
-import ProductsPage from "./components/List/Products";
-import CartPage from "./components/List/Cart";
+import LandingPage from "./components/LandingPage/LandingPage";
+import AlarmPage from "./components/AlarmPage/AlarmPage";
 
-
-
-
+export const ProductsContext = createContext();
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -80,6 +75,8 @@ function App() {
         // setProducts={setProducts}
       />
       <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/user/alarmpage" component={AlarmPage} />
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
         </Route>
