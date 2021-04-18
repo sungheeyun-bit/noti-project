@@ -11,12 +11,13 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage'
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
 import { initialState } from './assets/state';
 import axios from "axios";
-import LandingPage from "./LandingPage.js";
-import AlarmListPage from './AlarmListPage.js';
 import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 import GlobalState from "./components/Context/GlobalState";
-import ProductsPage from "./components/List/Products";
-import CartPage from "./components/List/Cart";
+import LandingPage from "./components/LandingPage/LandingPage";
+import AlarmPage from "./components/AlarmPage/AlarmPage";
+// import ProductsPage from "./components/List/Products";
+// import CartPage from "./components/List/Cart";
+
 export const ProductsContext = createContext();
 axios.defaults.withCredentials = true;
 function App() {
@@ -70,23 +71,24 @@ function App() {
         isLogin={isLogin}
       />
       <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/user/alarmpage" component={AlarmPage} />
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
         </Route>
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
         {/* <Route path="/" exact={true} component={LandingPage} /> */}
-        <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
         <Route 
           path="/product/:productId" 
           render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
-        <GlobalState> 
+        {/* <GlobalState> 
         <Route path="/" component={ProductsPage} exact />
         <Route path="/cart" component={CartPage} exact />
-        </GlobalState>
+        </GlobalState> */}
       </Switch>
     </Router>
   );

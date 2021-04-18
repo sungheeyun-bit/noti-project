@@ -8,6 +8,14 @@ import MainNavigation from "../MainNavigation";
 // import { addProductToCart } from '../store/actions';
 import "./Products.css";
 const ProductsPage = props => {
+
+  const [products, setProducts] = useState([]);
+  const context = useContext(ProductContext);
+  const [click, setClick] = useState(false);
+  const history = useHistory();
+  const handleClick = () => setClick(!click);
+
+  
   useEffect(() => {
     axios.get("https://localhost:4000/products/productList", {
       headers: {
@@ -19,14 +27,7 @@ const ProductsPage = props => {
       setProducts(res.data)
     })
   }, [])
-   const [products, setProducts] = useState([]);
-    const context = useContext(ProductContext);
-    useEffect(() => {
-    console.log(context);
-    }, []);
-   const [click, setClick] = useState(false);
-   const history = useHistory();
-   const handleClick = () => setClick(!click);
+
   return (
     <ProductContext.Consumer>
       {context => (
@@ -51,7 +52,8 @@ const ProductsPage = props => {
                     </Button>
                     <Link
                     exact
-                    to={`/product/${product.id}`}
+                    // to={`/product/${product._id}`}
+                    to="/product/:productId"
                     onClick={handleClick}>
                         상세정보 확인하기
                     </Link>

@@ -1,7 +1,7 @@
 import React, { useState, useReducer } from "react";
+
 import ProductContext from "./ProductContext";
 import { shopReducer, ADD_PRODUCT, REMOVE_PRODUCT, ALARM_SETTING } from "./Reducers";
-
 
 const GlobalState = props => {
   const products = [
@@ -34,26 +34,56 @@ const GlobalState = props => {
       done: false
     }
   ];
+
+  const initialState = {
+    products: {
+      loading: false,
+      data: null,
+      error: null
+    },
+    products: {
+      loading: false,
+      data: null,
+      error: null
+    }
+  };
+
+    // 로딩중일 때 바뀔 상태 객체
+  const loadingState = {
+    loading: true,
+    data: null,
+    error: null
+  };
+
+  // 성공했을 때의 상태 만들어주는 함수
+  const success = data => ({
+    loading: false,
+    data,
+    error: null
+  });
+
+  // 실패했을 때의 상태 만들어주는 함수
+  const error = error => ({
+    loading: false,
+    data: null,
+    error: error
+  });
+
   // const [cart, setCart] = useState([]);
   const [cartState, dispatch] = useReducer(shopReducer, { cart: [] });
+
   const addProductToCart = product => {
-    setTimeout(() => {
-      // setCart(updatedCart);
       dispatch({ type: ADD_PRODUCT, product: product });
-    }, 0);
   };
+
   const alarmSetting = productId => {
-    setTimeout(() => {
-      // setCart(updatedCart);
       dispatch({ type: ALARM_SETTING, productId: productId });
-    }, 0);
   };
+
   const removeProductFromCart = productId => {
-    setTimeout(() => {
-      // setCart(updatedCart);
       dispatch({ type: REMOVE_PRODUCT, productId: productId });
-    }, 0);
   };
+
   return (
     <ProductContext.Provider
       value={{
@@ -68,4 +98,5 @@ const GlobalState = props => {
     </ProductContext.Provider>
   );
 };
+
 export default GlobalState;
