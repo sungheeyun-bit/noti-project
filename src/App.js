@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useReducer } from "react";
 import {
   BrowserRouter as Router, 
   Route, 
@@ -11,14 +11,18 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage'
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
 import { initialState } from './assets/state';
 import axios from "axios";
-import LandingPage from "./LandingPage.js";
-import AlarmListPage from './AlarmListPage.js';
+
+
 import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 import GlobalState from "./components/Context/GlobalState";
 import ProductsPage from "./components/List/Products";
 import CartPage from "./components/List/Cart";
-export const ProductsContext = createContext();
+
+
+
+
 axios.defaults.withCredentials = true;
+
 function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [accessToken, setAccessToken] = useState("");
@@ -35,6 +39,7 @@ function App() {
     setIsLogin(false);
     setAccessToken("");
   }
+
   // useEffect(() => {
   //   axios.get("https://localhost:4000/products/productList", {
   //     headers: {
@@ -62,12 +67,17 @@ function App() {
   //     setProducts(res.data)
   //   })
   // }
+  // const [products, setProducts] = useState([]);
+
+
+
   return (
     <Router>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
         isLogin={isLogin}
+        // setProducts={setProducts}
       />
       <Switch>
         <Route exact path="/login">
@@ -76,17 +86,12 @@ function App() {
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
         {/* <Route path="/" exact={true} component={LandingPage} /> */}
-        <Route path="/alarmList" exact={true} component={AlarmListPage} />
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
         <Route 
           path="/product/:productId" 
           render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
-        <GlobalState> 
-        <Route path="/" component={ProductsPage} exact />
-        <Route path="/cart" component={CartPage} exact />
-        </GlobalState>
       </Switch>
     </Router>
   );

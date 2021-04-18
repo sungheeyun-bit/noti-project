@@ -8,13 +8,8 @@ axios.defaults.withCredentials = true;
 
 
 export default function Comments(props) {
-  console.log("코멘트", props)
 
-  //redux
-//  const user = useSelector(state => state.user)
   const [comment, setComment] = useState("")
-
-   
    
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -22,31 +17,28 @@ export default function Comments(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-  console.log("클릭됨")
-  console.log("댓글토큰확인", props.accessToken)
-    
-    const variables = {
-      comment: comment,
-      id: props.accessToken,
+
+      const variables = {
+      content: comment,
       productId: props.productId
     }
+
+   console.log(variables)
 
     axios
       .post("https://localhost:4000/products/writeComment", 
       variables,
       {
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
       })
       .then(response => {
         console.log ("포스트", response)
-      //   console.log("포스트", response)
-      //   if(response.data.success) {
-      //     setComment("") //다시 빈칸으로 바꿔주고
-      //     props.updateComment(response.data.result)
-
-      //   } else {
-      //     alert('failed to save comment')
-      //   }
+        if(response.data.success) {
+          setComment("") 
+          props.updateComment(response.data.data)
+        } else {
+          alert('failed to save comment')
+        }
        })
   }
 
