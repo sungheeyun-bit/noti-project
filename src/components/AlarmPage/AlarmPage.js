@@ -13,7 +13,6 @@ function AlarmPage(props) {
     const [ShowSuccess, setShowSuccess] = useState(false)
 
     // useEffect(() => {
-
     //     let cartItems = []
     //     //리덕스 User state안에 cart 안에 상품이 들어있는지 확인 
     //     if (props.user.userData && props.user.userData.cart) {
@@ -26,7 +25,6 @@ function AlarmPage(props) {
     //         }
     //     }
     // }, [props.user.userData])
-
 
     let calculateTotal = (cartDetail) => {
         let total = 0;
@@ -53,8 +51,6 @@ function AlarmPage(props) {
             })
 
     }
-
-
 
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>

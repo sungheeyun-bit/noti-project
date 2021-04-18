@@ -3,17 +3,17 @@ import React, { useEffect } from 'react'
 export default function LikeDislikes() {
 
 
-  useEffect(() => {
+  // useEffect(() => {
     
  
-    const variable = {
-      commentId: ,
-      nickName
-    }
+  //   const variable = {
+  //     commentId: ,
+  //     nickName
+  //   }
 
 
 
-  })
+  // })
 
   return (
     <div>
