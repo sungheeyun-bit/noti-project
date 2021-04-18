@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import qs from 'qs';
+
+// import {ProductsDispatch, productsReducer} from '../../contexts/ProductsContext';
+
 import SearchBox from "./SearchBox"
 import "../../Navbar.css";
 import axios from "axios";
 
-export default function Navbar({ updateSearchTerm, loginHandler, handleLogout, isLogin}){
+export default function Navbar({ loginHandler, handleLogout, isLogin,
+  // setProducts
+}){
   const [click, setClick] = useState(false);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleClick = () => setClick(!click);
 
@@ -15,6 +21,21 @@ export default function Navbar({ updateSearchTerm, loginHandler, handleLogout, i
   // const updateSearchTerm = (newSearchTerm) => {
   //   setSearchTerm(newSearchTerm)
   // }
+
+  // const [ productsState, dispatch ] = useReducer(productsReducer, {products: []});
+
+  const updateSearchTerm = (newSearchTerm) => {
+    // setSearchTerm(newSearchTerm)
+    axios.get(`https://localhost:4000/products/searchProduct?searchTerm=${newSearchTerm}`,
+      {headers: {
+        "Content-Type": "application/json"
+      }})
+      .then(response => {
+        console.log("검색결과", response)
+        // setProducts(response.data.data)
+      })  
+
+  }
 
   return(
     <>

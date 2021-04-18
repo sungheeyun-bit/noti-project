@@ -1,6 +1,8 @@
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const ALARM_SETTING = "ALARM_SETTING";
+export const FETCH_PRODUCTS = "FATCH_PRODUCTS";
+
 const addProductToCart = (product, state) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(
@@ -35,7 +37,12 @@ const removeProductFromCart = (productId, state) => {
 const alarmSetting = (productId, state) => {
   console.log("알람 세팅 with id: " + productId);
 }
+const fetchProducts = (products, state) => {
+  console.log("상품 불러오기");
+  return { ...state, products }
+}
 export const shopReducer = (state, action) => {
+  console.log(action)
   switch (action.type) {
     case ADD_PRODUCT:
       return addProductToCart(action.product, state);
@@ -47,6 +54,8 @@ export const shopReducer = (state, action) => {
       });
     case REMOVE_PRODUCT:
       return removeProductFromCart(action.productId, state);
+    case FETCH_PRODUCTS:
+      return fetchProducts(action.products, state);
     default:
       return state;
   }

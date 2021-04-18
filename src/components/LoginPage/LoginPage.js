@@ -6,10 +6,10 @@ import swal from "sweetalert";
 
 axios.defaults.withCredentials = true;
  
-export default function LoginPage({ loginHandler,issueAccessToken, accessToken, token }) {
+export default function LoginPage({ loginHandler }) {
   
   const [details, setDetails] = useState({email: "", password: ""})
-
+  const [user, setUser] = useState(null);
   const history = useHistory();
 
   const submitHandler = (e) =>{
@@ -41,9 +41,34 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
     })
   }
 
+  const handleLoginSuccess = (response) => {
+    console.log("구글로그인", response.profileObj)
+    if (response.profileObj) {
+      axios
+        .post(
+          "https://localhost:4000/users/socialLogin",
+          {
+            email: response.profileObj.email,
+            nickName: response.profileObj.name,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setUser(response.profileObj);
+          history.push("/");
+        });
+    }
+  };
+
+   const handleLoginFailure = (error) => {
+    console.log(error);
+  };
 
   return (
-
     <div className="container">
       <h2>Log in</h2>
       <form onSubmit={submitHandler}>
@@ -73,7 +98,7 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
           </button>
         </div>
        </form>   
-          {/* <div>
+       <div>
           <GoogleLogin
             className="btn-google"
             clientId="996092186048-291mg21lf890quda77fdgrqn11il9c0h.apps.googleusercontent.com"
@@ -82,7 +107,7 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
             onFailure={handleLoginFailure}
             cookiePolicy={"single_host_origin"}
           />
-        </div> */}
+        </div> 
         <div className="link-singup">
           <span>아직 계정이 없으신가요?</span>
           <Link to="/signup" style={{color:"black", textDecoration:"none"}}>
@@ -91,5 +116,5 @@ export default function LoginPage({ loginHandler,issueAccessToken, accessToken, 
         </div>    
     </div>
   )
-}
+};
 
