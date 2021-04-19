@@ -141,8 +141,6 @@ import { continents, price } from './Sections/Datas';
 export default function LandingPage(props) {
     console.log("랜딩 프롭스", props)
 
-
-
     const [ProductList, setProductList] = useState([])
     const history = useHistory();
     const [click, setClick] = useState(false);

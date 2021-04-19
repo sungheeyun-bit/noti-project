@@ -1,14 +1,20 @@
 import React from 'react'
-import LikeDislikes from './LikeDislikes'
+import Likes from './Likes'
 
-export default function SingleComment({props}) {
+export default function SingleComment(props) {
+
+  console.log("싱글코멘트 pros", props)
   return (
     <div>
       <li className="content" style={{listStyle: "none"}}>
-        {/* <div>{props.comment}</div>
-        <div>{props.writer}</div>
-        <div>{props.postId}</div> */}
-        <LikeDislikes />
+        <div>{props.comment.nickName}</div> 
+        <div>{props.comment.content}</div> 
+        {/* <div>{props.postId}</div>  */}
+        <Likes 
+          accessToken={props.accessToken}
+          commentId={props.comment._id}
+          productId={props.productId}
+          />
       </li>
     </div>
   )
