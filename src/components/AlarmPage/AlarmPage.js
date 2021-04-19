@@ -1,30 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { getCartItems, removeCartItem } from '../../_Actions/UserActions';
+// import { getCartItems, removeCartItem } from '../../_Actions/UserActions';
 import UserCardBlock from './Sections/UserCardBlock';
-import { Empty, Result } from 'antd';
+import { Result } from 'antd';
+import axios from "axios";
 import Interaction from "../LandingPage/Sections/Interaction";
 
+
+// 프롭스로 받을게 없음
 function AlarmPage(props) {
-    const dispatch = useDispatch();
+    console.log("상품 잘 겟하는지", props)
+    // const dispatch = useDispatch(getCartItems);
+    
 
     const [Total, setTotal] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
     const [ShowSuccess, setShowSuccess] = useState(false)
 
     // useEffect(() => {
-    //     let cartItems = []
+
+    // useEffect(() => {
+    //     let myList = []
     //     //리덕스 User state안에 cart 안에 상품이 들어있는지 확인 
-    //     if (props.user.userData && props.user.userData.cart) {
-    //         if (props.user.userData.cart.length > 0) {
-    //             props.user.userData.cart.forEach(item => {
+    //     if (userData && user.userData.myList) {
+    //         if (userData.cart.length > 0) {
+    //             user.userData.cart.forEach(item => {
     //                 cartItems.push(item.id)
     //             })
-    //             dispatch(getCartItems(cartItems, props.user.userData.cart))
+    //             dispatch(getCartItems(cartItems, user.userData.cart))
     //                 .then(response => { calculateTotal(response.payload) })
     //         }
     //     }
-    // }, [props.user.userData])
+    // }, [user.userData])
+
+
+    useEffect(() => {
+        axios.get("https://localhost:4000/products/myList",{
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+      })
+        .then(response => console.log("알림리스트",response.data))
+    })
 
     let calculateTotal = (cartDetail) => {
         let total = 0;
@@ -39,18 +54,18 @@ function AlarmPage(props) {
     }
 
 
-    let removeFromCart = (productId) => {
+    // let removeFromCart = (productId) => {
 
-        dispatch(removeCartItem(productId))
-            .then(response => {
+    //     dispatch(removeCartItem(productId))
+    //         .then(response => {
 
-                if (response.payload.productInfo.length <= 0) {
-                    setShowTotal(false)
-                }
+    //             if (response.payload.productInfo.length <= 0) {
+    //                 setShowTotal(false)
+    //             }
 
-            })
+    //         })
 
-    }
+    // }
 
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
