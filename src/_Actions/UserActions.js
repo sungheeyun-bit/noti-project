@@ -6,14 +6,22 @@ import {
     ALARM_SETTING
 } from './Types';
 
-const USER_SERVER = 'https://localhost:4000';
+const USER_SERVER = 'https://projectb1.com:4000';
+
+
+// 토큰 설정하여 포스팅 하기
+// 프롭스는 어디에?
+
+// {
+//     headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
+//   })
 
 export function addToCart(id) {
     let body = {
         productId: id
     }
     const request = axios.post(`${USER_SERVER}/products/addMyLIst`, body)
-        .then(response => response.data);
+        .then(response => response.data)
 
     return {
         type: ADD_TO_CART,
@@ -23,8 +31,9 @@ export function addToCart(id) {
 
 export function getCartItems(cartItems, userCart) {
 
-    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    const request = axios.get(`${USER_SERVER}/users/myList`)
         .then(response => {
+            console.log("test", userCart)
             // CartItem들에 해당하는 정보들을  
             // Product Collection에서 가져온후에 
             // Quantity 정보를 넣어 준다.

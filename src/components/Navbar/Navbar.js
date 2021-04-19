@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Icon, Badge } from "antd";
 import { Link, useHistory } from "react-router-dom";
 import qs from 'qs';
 
@@ -47,6 +48,18 @@ export default function Navbar({ loginHandler, handleLogout, isLogin,
             style={{textDecoration: "none", color: "black"}}>
             NOTI
           </Link>
+          {/* 테스트를 위한 알림 리스트 탭 입니다 */}
+          <Badge count={5}>
+          <Link exact to="/user/alarmpage"
+            activeClassName="active"
+            className="nav-links"
+            onClick={handleClick}
+            >
+              알림
+          </Link>
+          </Badge>
+          {/* 테스트를 위한 알림 리스트 탭 입니다 */}         
+
           <SearchBox updateSearchTerm={updateSearchTerm}/>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
              {isLogin ? (
@@ -60,6 +73,7 @@ export default function Navbar({ loginHandler, handleLogout, isLogin,
                   발매정보리스트
                 </Link>
               </li>
+
               {/* <li>
                 <Link 
                 to="/cart">Cart ({props.cartItemNumber})

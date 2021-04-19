@@ -75,7 +75,10 @@ function App() {
         // setProducts={setProducts}
       />
       <Switch>
-      <Route exact path="/" component={LandingPage} />
+      {/* <Route exact path="/" component={LandingPage} /> */}
+      <Route exact path="/">
+      <LandingPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+      </Route>
       <Route exact path="/user/alarmpage" component={AlarmPage} />
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
