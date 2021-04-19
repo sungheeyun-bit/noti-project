@@ -7,6 +7,9 @@ import axios from "axios";
 import { Icon, Col, Card, Row, Carousel } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { addtoCart } from "../../_Actions/UserActions";
+import SearchBox from "./Sections/SearchBox";
+
+
 // import ImageSlider from '../../utils/ImageSlider';
 // import Checkbox from './Sections/CheckBox';
 // import Radiobox from './Sections/RadioBox';
@@ -23,10 +26,12 @@ function LandingPage(props) {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     
-    useEffect(() => {
+     const [searchTerm, setSearchTerm] = useState("")
 
-        // axios.get("https://localhost:4000/products/filterProductList")
-        axios.get("https://projectb1.com:4000/products/filterProductList")
+
+    useEffect(() => {
+        axios.get("https://localhost:4000/products/filterProductList")
+        // axios.get("https://projectb1.com:4000/products/filterProductList")
             .then(response => {
                 console.log("제품 정보", response.data)
                 if (response.data.data) {
@@ -35,7 +40,20 @@ function LandingPage(props) {
                     alert(" 상품들을 가져오는데 실패 했습니다.")
                 }
             })
+
     },[])
+
+    const updateSearchTerm = (newSearchTerm) => {
+    
+      axios.get(`https://localhost:4000/products/searchProduct?searchTerm=${newSearchTerm}`,
+        {headers: {
+          "Content-Type": "application/json"
+        }})
+        .then(response => {
+          console.log("검색결과", response.data.data)
+          setProductList(response.data.data)
+      })  
+  }
     
     const renderCards = ProductList.map((data, index) => {        
         console.log("저장된 각 제품 불러오는지", data)
@@ -49,8 +67,7 @@ function LandingPage(props) {
         >
             <Link
                 exact
-                // to={`https://localhost:4000/products${product._id}`}
-                to="/product/:productId"
+                to={`/product/${data._id}`}
                 onClick={handleClick}>
                  상세정보 확인하기
             </Link>
@@ -74,6 +91,8 @@ function LandingPage(props) {
             </Interaction>
 
             <h1>최신발매정보</h1>
+            <SearchBox updateSearchTerm={updateSearchTerm} />
+            <br />
             <Card
             > 
                 <Meta/>

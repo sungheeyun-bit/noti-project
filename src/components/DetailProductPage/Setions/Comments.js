@@ -8,6 +8,7 @@ axios.defaults.withCredentials = true;
 
 
 export default function Comments(props) {
+  console.log("코멘트 props", props)
 
   const [comment, setComment] = useState("")
    
@@ -19,11 +20,11 @@ export default function Comments(props) {
     e.preventDefault();
 
       const variables = {
-      content: comment,
-      productId: props.productId
+      comment: comment,
+      _id: props.productId
     }
 
-   console.log(variables)
+   console.log("댓글 보내는값", variables)
 
     axios
       .post("https://localhost:4000/products/writeComment", 
@@ -34,8 +35,9 @@ export default function Comments(props) {
       .then(response => {
         console.log ("포스트", response)
         if(response.data.success) {
-          setComment("") 
+          setComment("")
           props.updateComment(response.data.data)
+        
         } else {
           alert('failed to save comment')
         }

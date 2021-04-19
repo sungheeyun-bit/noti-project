@@ -32,12 +32,9 @@ export default function UploadProdctPage() {
     setReleaseDate(e.target.value)
   }
 
-
   const updateImages = (newImages) => {
     setImages(newImages)
   }
-
-
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -86,7 +83,7 @@ export default function UploadProdctPage() {
       <Input onChange={productNameChangeHandler} value={productName}/>
       <br />
       <br />
-      <label>브랜드</label>
+      <label>브랜드페이지</label>
       <Input onChange={brandChangeHandler} value={brand}/>      
       <br />
       <br />
@@ -100,9 +97,7 @@ export default function UploadProdctPage() {
       <br />
       <Button type="submit" onClick={submitHandler}>확인</Button>
     </Form>
-
     </div>
-
   )
 }
 
