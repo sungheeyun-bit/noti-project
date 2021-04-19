@@ -6,23 +6,23 @@ import '../../DetailProductPage.css';
 
 export default function DetailProductPage(props) {
   
-  console.log('props가 뭐니', props)
+console.log('props가 뭐니', props)
 const productId = props.match.params.productId
   
 const [product, setProduct] = useState([])
 const [commentLists, setCommentLists] = useState([])
 
 
-
   useEffect(() => {
     
     axios
-      .get(`/product/detailProduct?id=${productId}&type=single`)
+      // .get(`/product/detailProduct?id=${productId}&type=single`)
+      .get(`https://localhost:4000/products/detailProduct?id=${productId}`)
         .then(response => {
           console.log("상세페이지", response.data)
           if(response.data.success){
-            console.log('res.data', response.data)
-            setProduct(response.data.product[0])
+            console.log('res.data', response.data.data)
+            setProduct(response.data.data)
           } else {
             alert('상세 정보 가져오기를 실패했습니다')
           }
@@ -66,7 +66,7 @@ const [commentLists, setCommentLists] = useState([])
     
   return (
   <>
-  {console.log(product)}
+  {console.log("상세제품",product)}
     {/* <div className="detail-wrapper">
       {
         product.map(item => (
@@ -81,7 +81,7 @@ const [commentLists, setCommentLists] = useState([])
               </div>
               <div className="row">
                 <span>발매일</span> 
-                <span style={{fontWeight:"500"}}>{item.releaseDate}</span> 
+                <span style={{fontWeight:"500"}}>{item.releaseString}</span> 
               </div>
               <div className="row">
                 <span>발매가격</span>  
@@ -112,7 +112,7 @@ const [commentLists, setCommentLists] = useState([])
               </div>
               <div className="row">
                 <span>발매일</span> 
-                <span style={{fontWeight:"500"}}>{item.releaseDate}</span> 
+                <span style={{fontWeight:"500"}}>{item.releaseString}</span> 
               </div>
               <div className="row">
                 <span>발매가격</span>  
@@ -125,7 +125,7 @@ const [commentLists, setCommentLists] = useState([])
     </div>
     <Comments 
       commentLists={commentLists} 
-      // productId={product[0]._id} 
+      productId={productId} 
       accessToken={props.accessToken}
       updateComment={updateComment} />
   </>   

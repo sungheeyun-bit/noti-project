@@ -79,7 +79,10 @@ function App() {
       <Route exact path="/">
       <LandingPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
       </Route>
-      <Route exact path="/user/alarmpage" component={AlarmPage} />
+      {/* <Route exact path="/user/alarmpage" component={AlarmPage} /> */}
+      <Route exact path="/user/alarmpage">
+        <AlarmPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+      </Route>
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
         </Route>

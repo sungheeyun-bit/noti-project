@@ -16,42 +16,49 @@ const USER_SERVER = 'https://projectb1.com:4000';
 //     headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
 //   })
 
-export function addToCart(id) {
-    let body = {
-        productId: id
-    }
-    const request = axios.post(`${USER_SERVER}/products/addMyLIst`, body)
-        .then(response => response.data)
+// export function addToCart(id, token) {
+//     console.log("카트 받은값", id)
+//     let body = {
+//         productId: id
+//     }
 
-    return {
-        type: ADD_TO_CART,
-        payload: request
-    }
-}
+//     console.log(body)
+//     const request = axios.post(`https://localhost:4000/products/addMyLIst`, body, 
+//       {
+//         headers: { "Content-Type": "application/json" , "okCome": token}
+//       })
+//         .then(response => 
+//             console.log("장바구니",response.data))
 
-export function getCartItems(cartItems, userCart) {
+//     return {
+//         type: ADD_TO_CART,
+//         payload: request
+//     }
+// }
 
-    const request = axios.get(`${USER_SERVER}/users/myList`)
-        .then(response => {
-            console.log("test", userCart)
+// export function getCartItems(cartItems, userCart) {
+
+//     const request = axios.get(`${USER_SERVER}/users/myList`)
+//         .then(response => {
+//             console.log("test", userCart)
             // CartItem들에 해당하는 정보들을  
             // Product Collection에서 가져온후에 
             // Quantity 정보를 넣어 준다.
-            userCart.forEach(cartItem => {
-                response.data.forEach((productDetail, index) => {
-                    if (cartItem.id === productDetail._id) {
-                        response.data[index].quantity = cartItem.quantity
-                    }
-                })
-            })
-            return response.data;
-        });
+//             userCart.forEach(cartItem => {
+//                 response.data.forEach((productDetail, index) => {
+//                     if (cartItem.id === productDetail._id) {
+//                         response.data[index].quantity = cartItem.quantity
+//                     }
+//                 })
+//             })
+//             return response.data;
+//         });
 
-    return {
-        type: GET_CART_ITEMS,
-        payload: request
-    }
-}
+//     return {
+//         type: GET_CART_ITEMS,
+//         payload: request
+//     }
+// }
 
 
 export function removeCartItem(productId) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { getCartItems, removeCartItem } from '../../_Actions/UserActions';
+// import { getCartItems, removeCartItem } from '../../_Actions/UserActions';
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result } from 'antd';
 import axios from "axios";
@@ -10,7 +10,7 @@ import Interaction from "../LandingPage/Sections/Interaction";
 // 프롭스로 받을게 없음
 function AlarmPage(props) {
     console.log("상품 잘 겟하는지", props)
-    const dispatch = useDispatch(getCartItems);
+    // const dispatch = useDispatch(getCartItems);
     
 
     const [Total, setTotal] = useState(0)
@@ -33,6 +33,14 @@ function AlarmPage(props) {
     //     }
     // }, [user.userData])
 
+
+    useEffect(() => {
+        axios.get("https://localhost:4000/products/myList",{
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+      })
+        .then(response => console.log("알림리스트",response.data))
+    })
+
     let calculateTotal = (cartDetail) => {
         let total = 0;
 
@@ -46,18 +54,18 @@ function AlarmPage(props) {
     }
 
 
-    let removeFromCart = (productId) => {
+    // let removeFromCart = (productId) => {
 
-        dispatch(removeCartItem(productId))
-            .then(response => {
+    //     dispatch(removeCartItem(productId))
+    //         .then(response => {
 
-                if (response.payload.productInfo.length <= 0) {
-                    setShowTotal(false)
-                }
+    //             if (response.payload.productInfo.length <= 0) {
+    //                 setShowTotal(false)
+    //             }
 
-            })
+    //         })
 
-    }
+    // }
 
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
