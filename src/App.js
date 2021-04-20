@@ -35,37 +35,6 @@ function App() {
     setAccessToken("");
   }
 
-  // useEffect(() => {
-  //   axios.get("https://localhost:4000/products/productList", {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //   .then((res) => {
-  //     console.log("제품들", res.data)
-  //     setProducts(res.data)
-  //   })
-  // }, [])
-  //landingpage
-  // const [products, setProducts] = useState([]);
-  // useEffect(() => {
-  //  searchProducts()
-  // }, [])
-  // const searchProducts = (newSearchTerm) => {
-  //   axios.get("https://localhost:4000/products/",{
-  //     headers: {
-  //       "Content-Type":"application/json"
-  //     }
-  //   })
-  //   .then(res => {
-  //     console.log(res)
-  //     setProducts(res.data)
-  //   })
-  // }
-  // const [products, setProducts] = useState([]);
-
-
-
   return (
     <Router>
       <Navbar 

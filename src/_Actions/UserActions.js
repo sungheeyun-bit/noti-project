@@ -16,8 +16,8 @@ const USER_SERVER = 'https://projectb1.com:4000';
 //     headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
 //   })
 
-// export function addToCart(id, token) {
-//     console.log("카트 받은값", id)
+// export function addToCart(id) {
+
 //     let body = {
 //         productId: id
 //     }

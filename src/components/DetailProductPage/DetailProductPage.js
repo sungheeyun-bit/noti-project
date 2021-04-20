@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
-import { initialState } from '../../assets/state';
 import Comments from './Setions/Comments';
 import '../../DetailProductPage.css';
 
@@ -13,16 +12,18 @@ const [product, setProduct] = useState([])
 const [commentLists, setCommentLists] = useState([])
 
 
+const [likes, setLikes] = useState(0)
+
   useEffect(() => {
     
     axios
-      // .get(`/product/detailProduct?id=${productId}&type=single`)
       .get(`https://localhost:4000/products/detailProduct?id=${productId}`)
         .then(response => {
           console.log("상세페이지", response.data)
           if(response.data.success){
             console.log('res.data', response.data.data)
             setProduct(response.data.data)
+            setCommentLists(response.data.data[0].comment)
           } else {
             alert('상세 정보 가져오기를 실패했습니다')
           }
@@ -30,29 +31,19 @@ const [commentLists, setCommentLists] = useState([])
 
       }, [])
 
-  //   axios
-  //     .get(`/product/comment`)
-  //       .then(response => {
-  //         if(response.data.success){
-  //           console.log('res.data', response.data)
-  //           setCommentLists(response.data.comment)
-  //         } else {
-  //           alert('상세 정보 가져오기를 실패했습니다')
-  //         }
-  //       })
-  // }, [])
-
-
-  // const [product, setProducts] = useState(initialState.product);
-  // const [commentLists, setCommentLists] = useState([])
   const [index, setIndex] = useState(0)
 
   const myRef = useRef(null)
 
+
+  const updateLikes = (newLike) => {
+    console.log("뉴라이크", newLike)
+    setLikes(newLike)
+  }
+
   const updateComment = (newComment) => {
     console.log("뉴코멘트", newComment)
     setCommentLists(commentLists.concat(newComment))
-   
   }
   
   const handleTab = (index) =>{
@@ -123,12 +114,17 @@ const [commentLists, setCommentLists] = useState([])
         ))
       }
     </div>
+
     <Comments 
       commentLists={commentLists} 
       productId={productId} 
       accessToken={props.accessToken}
-      updateComment={updateComment} />
+      updateComment={updateComment} 
+      updateLikes={updateLikes}
+      />
   </>   
   )
 }
+
+
 
