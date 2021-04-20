@@ -21,8 +21,8 @@ axios.defaults.withCredentials = true;
 
 function App() {
 
-    const [isLogin, setIsLogin] = useState(false);
-    const [accessToken, setAccessToken] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
   const loginHandler = (data) => {
     setIsLogin(true)
     issueAccessToken(data.data);
@@ -37,7 +37,6 @@ function App() {
   }
 
   return (
-    
     <Router>
      <ChakraProvider>
       <Navbar 

@@ -36,7 +36,8 @@ export default function Comments(props) {
       .then(response => {
         console.log ("포스트", response.data)
         if(response.data.success) {
-          props.updateComment(response.data.data)
+          console.log(response.data)
+          props.updateComment(response.data.data.comment)
           setComment("")        
         } else {
           alert('failed to save comment')
@@ -46,7 +47,7 @@ export default function Comments(props) {
         if(err.response.status === 401) {
           alert("로그인이 필요합니다.")
       }
-    })       
+    })
   }
 
   return (
