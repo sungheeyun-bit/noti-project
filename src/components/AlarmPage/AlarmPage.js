@@ -1,98 +1,76 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-// import { getCartItems, removeCartItem } from '../../_Actions/UserActions';
-import UserCardBlock from './Sections/UserCardBlock';
-import { Result } from 'antd';
+import { Switch, Button } from "antd"
 import axios from "axios";
-import Interaction from "../LandingPage/Sections/Interaction";
+import Toast from '../LandingPage/Sections/Toast'
 
-
-// 프롭스로 받을게 없음
 function AlarmPage(props) {
     console.log("상품 잘 겟하는지", props)
-    // const dispatch = useDispatch(getCartItems);
     
-
-    const [Total, setTotal] = useState(0)
-    const [ShowTotal, setShowTotal] = useState(false)
-    const [ShowSuccess, setShowSuccess] = useState(false)
-
-    // useEffect(() => {
-
-    // useEffect(() => {
-    //     let myList = []
-    //     //리덕스 User state안에 cart 안에 상품이 들어있는지 확인 
-    //     if (userData && user.userData.myList) {
-    //         if (userData.cart.length > 0) {
-    //             user.userData.cart.forEach(item => {
-    //                 cartItems.push(item.id)
-    //             })
-    //             dispatch(getCartItems(cartItems, user.userData.cart))
-    //                 .then(response => { calculateTotal(response.payload) })
-    //         }
-    //     }
-    // }, [user.userData])
-
+    const [AlarmList, setAlarmList] = useState([])
+    const [LeftDay, setLeftDay] = useState("")
 
     useEffect(() => {
         axios.get("https://localhost:4000/products/myList",{
         headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
       })
-        .then(response => console.log("알림리스트",response.data))
-    })
-
-    let calculateTotal = (cartDetail) => {
-        let total = 0;
-
-        cartDetail.map(item => {
-            total += parseInt(item.price, 10) * item.quantity
+        .then(response => {
+            console.log("알림리스트",response.status)
+            if (response.status === 200) {
+                setAlarmList(response.data.data)
+                setLeftDay(response.data.leftDay)
+            }
         })
+    },[])
 
-        setTotal(total)
-        setShowTotal(true)
-
+    const alarmSetting = (productId) => {
+        console.log("알람설정")
+        let body = {
+        productId: productId
+        }
+        axios.patch(`https://localhost:4000/products/changeAlarm`, body, {
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+      })
+          .then(response => {
+            console.log(response.data);
+          });
     }
 
 
-    // let removeFromCart = (productId) => {
+    const handleDelete = (productId) => {
+        console.log("삭제버튼")
+        axios.delete(`https://localhost:4000/products/removeAlarm?productId=${productId}`, {
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+      })
+          .then(response => {
+            console.log(response.data);
+          });
+    }
 
-    //     dispatch(removeCartItem(productId))
-    //         .then(response => {
-
-    //             if (response.payload.productInfo.length <= 0) {
-    //                 setShowTotal(false)
-    //             }
-
-    //         })
-
-    // }
-
-    return (
-        <div style={{ width: '85%', margin: '3rem auto' }}>
-            <h1>알림 리스트 페이지</h1>
-
+    const renderCards = AlarmList.map((data, index) => {
+        console.log("저장된 각 제품 불러오는지", data)
+        const key={index}
+        return <div>
             <div>
-                {/* <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart} /> */}
+                {<img src ={`https://projectb1.com:4000/${data.images}`}/>}
+
+                <h2>{data.releaseString}</h2>
+                <h2>{data.productName}</h2>
+                <Switch onChange={alarmSetting}></Switch>
+                <Button onClick={handleDelete}> 삭제 </Button>
+             </div>
             </div>
-
-            {ShowTotal ?
-                <div style={{ marginTop: '3rem' }}>
-                    <h2>Total Amount: ${Total}</h2>
+    })
+    
+        return (
+            <div style={{ width: '85%', margin: '3rem auto' }}>
+                <h1>알림 리스트 페이지</h1>
+                <h2>{LeftDay}일 뒤,</h2>
+                <div>
+                    {renderCards}
                 </div>
-                : ShowSuccess ?
-                    <Result
-                        status="success"
-                        title="Successfully Purchased Items"
-                    />
-                    :
-                    <>
-                        <br />
-                        <Interaction description={false} />
-                    </>
-            }
 
-        </div>
-    )
-}
+            </div>
+        )
+    }
 
 export default AlarmPage

@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect, useReducer } from "react";
+import { ChakraProvider } from "@chakra-ui/react"
 import {
   BrowserRouter as Router, 
   Route, 
@@ -19,9 +20,9 @@ export const ProductsContext = createContext();
 axios.defaults.withCredentials = true;
 
 function App() {
+
     const [isLogin, setIsLogin] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-   // const [products, setProducts] = useState([]);
   const loginHandler = (data) => {
     setIsLogin(true)
     issueAccessToken(data.data);
@@ -36,7 +37,9 @@ function App() {
   }
 
   return (
+    
     <Router>
+     <ChakraProvider>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
@@ -65,7 +68,9 @@ function App() {
           path="/product/:productId" 
           render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
       </Switch>
+      </ChakraProvider>
     </Router>
+    
   );
 }
 export default App;
