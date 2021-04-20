@@ -12,8 +12,6 @@ import { Box, Image, AspectRatio, Badge } from "@chakra-ui/react"
 export default function LandingPage(props) {
     console.log("랜딩 프롭스", props)
 
-
-
     const [ProductList, setProductList] = useState([])
     const history = useHistory();
     const [click, setClick] = useState(false);
@@ -121,8 +119,8 @@ export default function LandingPage(props) {
             <Box bg="tomato" w="100%" p={4} color="white">
                 This is the Box
             </Box>
-            <Interaction>
-            </Interaction>
+            {/* <Interaction>
+            </Interaction> */}
 
             
             <SearchBox updateSearchTerm={updateSearchTerm} />
