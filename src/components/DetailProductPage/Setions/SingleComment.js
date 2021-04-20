@@ -2,7 +2,7 @@ import React from 'react'
 import Likes from './Likes'
 
 export default function SingleComment(props) {
-
+console.log("싱글코멘트", props)
   return (
     <div>
       <li className="contents" style={{listStyle: "none"}}>
@@ -12,6 +12,7 @@ export default function SingleComment(props) {
           accessToken={props.accessToken}
           commentId={props.comment._id}
           productId={props.productId}
+          updateLikes={props.updateLikes}
           />
       </li>
     </div>

@@ -12,6 +12,8 @@ const [product, setProduct] = useState([])
 const [commentLists, setCommentLists] = useState([])
 
 
+const [likes, setLikes] = useState(0)
+
   useEffect(() => {
     
     axios
@@ -33,10 +35,15 @@ const [commentLists, setCommentLists] = useState([])
 
   const myRef = useRef(null)
 
+
+  const updateLikes = (newLike) => {
+    console.log("뉴라이크", newLike)
+    setLikes(newLike)
+  }
+
   const updateComment = (newComment) => {
     console.log("뉴코멘트", newComment)
     setCommentLists(commentLists.concat(newComment))
-   
   }
   
   const handleTab = (index) =>{
@@ -112,7 +119,9 @@ const [commentLists, setCommentLists] = useState([])
       commentLists={commentLists} 
       productId={productId} 
       accessToken={props.accessToken}
-      updateComment={updateComment} />
+      updateComment={updateComment} 
+      updateLikes={updateLikes}
+      />
   </>   
   )
 }

@@ -36,9 +36,8 @@ export default function Comments(props) {
       .then(response => {
         console.log ("포스트", response.data)
         if(response.data.success) {
-          setComment("")
           props.updateComment(response.data.data)
-        
+          setComment("")        
         } else {
           alert('failed to save comment')
         }
@@ -54,7 +53,6 @@ export default function Comments(props) {
     <div>
       <br />
       <p> replies</p>
-      
       {/* root comment form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
         <textarea 
@@ -74,6 +72,7 @@ export default function Comments(props) {
             comment={comment} 
             productId={props.productId} 
             accessToken={props.accessToken}
+            updateLikes={props.updateLikes}
          />
       ))}
     </div>
