@@ -43,7 +43,7 @@ export default function Navbar({ loginHandler, handleLogout, isLogin }){
                 </Link>
               </li>
               <li className="nav-item">
-                <Link exact to="/"
+                <Link exact to="/user/alarmpage"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}

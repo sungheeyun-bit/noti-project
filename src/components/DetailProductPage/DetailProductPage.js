@@ -14,7 +14,7 @@ const [likes, setLikes] = useState(0)
 
   useEffect(() => {
     axios
-      .get(`https://localhost:4000/products/detailProduct?id=${productId}`)
+      .get(`https://projectb1.com:4000/products/detailProduct?id=${productId}`)
         .then(response => {
           if(response.data.success){
             console.log('res.data', response.data.data)
@@ -60,7 +60,6 @@ const [likes, setLikes] = useState(0)
             <div className="info">
               <div className="row">
                  <h2>{item.productName}</h2>
-                  <i class="far fa-bell"></i>
               </div>
               <div className="row">
                 <span>발매일</span> 
@@ -91,7 +90,6 @@ const [likes, setLikes] = useState(0)
             <div className="info">
               <div className="row">
                  <h2>{item.productName}</h2>
-                  <i class="far fa-bell"></i>
               </div>
               <div className="row">
                 <span>발매일</span> 

@@ -37,7 +37,7 @@ export default function SingupPage() {
    
     axios
       .post(
-        "https://localhost:4000/users/signup",
+        "https://projectb1.com:4000/users/signup",
         {
           nickName,
           email,

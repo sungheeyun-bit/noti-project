@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react"
 import {
   BrowserRouter as Router, 
@@ -10,13 +10,11 @@ import SignupPage from './components/SignupPage/SignupPage';
 import Navbar from './components/Navbar/Navbar';
 import DetailProductPage from './components/DetailProductPage/DetailProductPage';
 import ModifiedPage from './components/ModifiedPage/ModifiedPage';
-import { initialState } from './assets/state';
-import axios from "axios";
 import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 import LandingPage from "./components/LandingPage/LandingPage";
 import AlarmPage from "./components/AlarmPage/AlarmPage";
+import axios from "axios";
 
-export const ProductsContext = createContext();
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -36,36 +34,95 @@ function App() {
     setAccessToken("");
   }
 
-  return (
+  const [productList, setProductList] = useState([])
+  const [alarmList, setAlarmList] = useState([])
+  const [leftDay, setLeftDay] = useState("")
+
+  useEffect(() => {
+    axios
+      .get("https://projectb1.com:4000/products/filterProductList")
+        .then(response => {
+         console.log("제품 정보", response.data)
+          if(response.data.data) {
+            setProductList(response.data.data)
+          } else {
+            alert(" 상품들을 가져오는데 실패 했습니다.")
+          }
+        })
+    },[])
+
+  const addToCart = (productId) => {
+    console.log("리스트저장아이디", productId)
+   
+    const goToList = productList.filter((el) => el._id === productId)[0]
+    console.log("고투", goToList)
+    const body = goToList
+    axios
+      .post('https://projectb1.com:4000/products/addMyLIst',
+      body,
+      {
+        headers: { "Content-Type": "application/json" , "okCome": accessToken}
+      })
+        .then((response) => {
+          if(response.status === 201){
+            alert("저장되었습니다")
+          }
+      })
+      .catch((err) => {
+        if(err.response.status === 400){
+          alert("이미 리스트에 저장된 상품입니다")
+        } else if(err.response.status === 404) {
+          alert("로그인이 필요합니다.")
+        }
+      })
+  }
+
+  const updateSearchTerm = (newSearchTerm) => {
+    axios
+      .get(`https://projectb1.com:4000/products/searchProduct?searchTerm=${newSearchTerm}`,
+        {
+        headers: {"Content-Type": "application/json"}
+        })
+        .then(response => {
+          setProductList(response.data.data)
+    })  
+  }
+
+  
+return (
+  
     <Router>
      <ChakraProvider>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
         isLogin={isLogin}
-        // setProducts={setProducts}
+        alarmList={alarmList}
       />
       <Switch>
-      {/* <Route exact path="/" component={LandingPage} /> */}
       <Route exact path="/">
-      <LandingPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+      <LandingPage 
+        productList={productList}
+        addToCart={addToCart}
+        updateSearchTerm={updateSearchTerm}
+        />
       </Route>
-      {/* <Route exact path="/user/alarmpage" component={AlarmPage} /> */}
       <Route exact path="/user/alarmpage">
-        <AlarmPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+        <AlarmPage 
+          accessToken={accessToken} 
+        />
       </Route>
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
         </Route>
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
-        {/* <Route path="/" exact={true} component={LandingPage} /> */}
         <Route path="/modified">
           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
         </Route> 
         <Route 
           path="/product/:productId" 
-          render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
+          render={(props) =>  <DetailProductPage accessToken={accessToken} {...props} />} />
       </Switch>
       </ChakraProvider>
     </Router>

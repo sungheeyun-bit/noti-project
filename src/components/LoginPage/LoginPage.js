@@ -21,7 +21,7 @@ export default function LoginPage({ loginHandler }) {
       return swal("Oops", "모든 항목은 필수입니다.", "error");
     }
 
-    axios.post("https://localhost:4000/users/login", 
+    axios.post("https://projectb1.com:4000/users/login", 
     {
       email,
       password
@@ -46,7 +46,7 @@ export default function LoginPage({ loginHandler }) {
     if (response.profileObj) {
       axios
         .post(
-          "https://localhost:4000/users/socialLogin",
+          "https://projectb1.com:4000/users/socialLogin",
           {
             email: response.profileObj.email,
             nickName: response.profileObj.name,
