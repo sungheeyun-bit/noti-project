@@ -4,31 +4,22 @@ import SingleComment from './SingleComment';
 
 axios.defaults.withCredentials = true;
 
-
 export default function Comments(props) {
   const [comment, setComment] = useState("")
-   
-  
-  
   const handleChange = (e) => {
     setComment(e.target.value)
   }
-
   const onSubmit = (e) => {
     e.preventDefault();
-
     if(comment === "") {
       alert("내용을 입력해주세요")
       return
     }
-
   const body = {
       comment: comment,
       _id: props.productId
     }
-
    console.log("댓글 보내는값", body)
-
     axios
       .post("https://projectb1.com:4000/products/writeComment", 
       body,
@@ -51,7 +42,6 @@ export default function Comments(props) {
       }
     })
   }
-
   return (
     <div>
       <br />
@@ -66,7 +56,6 @@ export default function Comments(props) {
         />
         <br />
         <button style={{ width:"20%", height:"52px"}} onClick={onSubmit}>Submit</button>
-
       </form>
       {/* comment lists */}
     
@@ -82,18 +71,3 @@ export default function Comments(props) {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

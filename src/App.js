@@ -16,9 +16,7 @@ import AlarmPage from "./components/AlarmPage/AlarmPage";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-
 function App() {
-
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const loginHandler = (data) => {

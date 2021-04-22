@@ -1,8 +1,6 @@
 import React from 'react'
 import Likes from './Likes'
-
 export default function SingleComment(props) {
-
   return (
     <div>
       <li className="contents" style={{listStyle: "none"}}>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Switch, Button } from "antd"
 import axios from "axios";
 import Toast from '../LandingPage/Sections/Toast'
 import AlarmItem from './Sections/AlarmItem';
@@ -34,7 +33,6 @@ function AlarmPage({ accessToken }) {
     setAlarmList(response.data.data.myList)
   });
 }
-
 
 return (
   <div style={{ width: '85%', margin: '3rem auto' }}>

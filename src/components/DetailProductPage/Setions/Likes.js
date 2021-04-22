@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
 axios.defaults.withCredentials = true;
-
 export default function Likes(props) {
 
   const [likeCount, setLikeCount] = useState(props.goodCount);
@@ -14,7 +12,6 @@ export default function Likes(props) {
       id: props.productId,
       comment_id: props.commentId
     }
-
     axios.patch(`https://projectb1.com:4000/products/good`, body, 
       {
         headers: { "Content-Type": "application/json" , "okCome": props.accessToken}

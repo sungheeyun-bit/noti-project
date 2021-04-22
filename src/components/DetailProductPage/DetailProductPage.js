@@ -89,27 +89,6 @@ const [likes, setLikes] = useState(0)
       }
       {console.log("상세페이지",product)}
     </div> 
-    {/* <div className="detail-wrapper">
-      {
-        product.map(item => (
-          <div className="details" key={item.id}>
-            <div className="info">
-              <div className="row">
-                 <h2>{item.productName}</h2>
-              </div>
-              <div className="row">
-                <span>발매일</span> 
-                <span style={{fontWeight:"500"}}>{item.releaseString}</span> 
-              </div>
-              <div className="row">
-                <span>발매가격</span>  
-                <span style={{fontWeight:"500"}}>KRW {item.price}</span>
-              </div>
-            </div>
-          </div>
-        ))
-      }
-    </div> */}
 
     <Comments 
       commentLists={commentLists} 
