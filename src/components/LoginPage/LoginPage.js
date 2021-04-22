@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Card } from './Section/Card'
+// import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import GoogleLogin from "react-google-login";
+import "./LoginPage.css";
 import axios from 'axios';
 import swal from "sweetalert";
-
+import Toast from "../LandingPage/Sections/Toast"
+import {
+  Box,
+  Button,
+  Heading,
+  Stack,
+  FormControl,
+  FormLabel,
+  Input,
+  SimpleGrid,
+  Link,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 axios.defaults.withCredentials = true;
  
 export default function LoginPage({ loginHandler }) {
@@ -20,8 +36,8 @@ export default function LoginPage({ loginHandler }) {
     if(!email || !password){
       return swal("Oops", "모든 항목은 필수입니다.", "error");
     }
-
-    axios.post("https://localhost:4000/users/login", 
+    
+    axios.post("https://projectb1.com:4000/users/login", 
     {
       email,
       password
@@ -69,37 +85,58 @@ export default function LoginPage({ loginHandler }) {
   };
 
   return (
-    <div className="container">
-      <h2>Log in</h2>
-      <form onSubmit={submitHandler}>
-        <div className="email-form">
-          📧 이메일
-          <input 
-            className="input"
-            type="text"
-            placeholder="이메일을 입력해주세요."
-            value={details.email}
-            onChange={(e) => setDetails({...details, email: e.target.value})}
-          />
-        </div>
-        <div className="password-form">
-          🔐 비밀번호
-          <input 
-            className="input"
-            type="password"
-            placeholder="비밀번호를 입력해주세요."
-            value={details.password}
-            onChange={(e) => setDetails({...details, password: e.target.value})}
-          />
-        </div>
-        <div>
-          <button className="btn-signin" onClick={submitHandler}>
-          이메일로 시작하기
-          </button>
-        </div>
-       </form>   
-       <div>
+    <Box
+    bg={useColorModeValue('gray.50', 'inherit')}
+    minH="100vh"
+    py="12"
+    px={{ base: '4', lg: '8' }}
+  >
+    <Box maxW="md" mx="auto">
+    <SimpleGrid mt="16" columns={3} spacing="3"/>
+    <Heading textAlign="center" size="lg" fontWeight="extrabold">
+        🔔 꼭 갖고 싶은 아이템 놓치지 마세요!
+      </Heading>
+      {/* simpleGrid mt===lineHeight 적용 */}
+      <SimpleGrid mt="10" columns={3} spacing="3"/>
+      <Card>
+        <Stack spacing="6">
+          <FormControl id="email">
+            <FormLabel>💌 이메일</FormLabel>
+              <Input onChange={(e) => setDetails({...details, email: e.target.value})}
+                value={details.email}
+                name="email" 
+                type="email" 
+                placeholder="이메일을 입력해주세요."
+                autoComplete="email" required />
+            </FormControl>
+
+        </Stack>
+          <SimpleGrid mt="6" columns={3} spacing="3"/>
+          <FormControl id="email">
+           <FormLabel>🔐 비밀번호</FormLabel>
+              <Input onChange={(e) => setDetails({...details, password: e.target.value})}
+              value={details.password}
+              name="email" 
+              type="password"
+              placeholder="비밀번호를 입력해주세요."
+              autoComplete="email" required />
+           </FormControl>
+
+           <SimpleGrid mt="6" columns={3} spacing="3"/>
+          <Button
+              onClick={submitHandler}  
+              type="submit" 
+              colorScheme="purple" 
+              // size="lg"
+              width="full"
+              fontSize="md">
+              이메일로 시작하기
+          </Button>
+
+          <SimpleGrid mt="6" columns={3} spacing="3"/>
+          
           <GoogleLogin
+            buttonSize="320px"
             className="btn-google"
             clientId="996092186048-291mg21lf890quda77fdgrqn11il9c0h.apps.googleusercontent.com"
             buttonText="구글 계정으로 시작하기"
@@ -107,14 +144,16 @@ export default function LoginPage({ loginHandler }) {
             onFailure={handleLoginFailure}
             cookiePolicy={"single_host_origin"}
           />
-        </div> 
-        <div className="link-singup">
-          <span>아직 계정이 없으신가요?</span>
-          <Link to="/signup" style={{color:"black", textDecoration:"none"}}>
-          👉 회원가입하기
-          </Link>          
-        </div>    
-    </div>
+          <Text>
+          아직 계정이 없으신가요?{" "}
+            <Link 
+            color="purple" 
+            href="/signup">
+            👉 회원가입하기
+            </Link>
+          </Text>
+      </Card>    
+    </Box>
+    </Box>
   )
 };
-

@@ -17,7 +17,7 @@ const [likes, setLikes] = useState(0)
   useEffect(() => {
     
     axios
-      .get(`https://localhost:4000/products/detailProduct?id=${productId}`)
+      .get(`https://projectb1.com:4000/products/detailProduct?id=${productId}`)
         .then(response => {
           console.log("상세페이지", response.data)
           if(response.data.success){
@@ -42,8 +42,7 @@ const [likes, setLikes] = useState(0)
   }
 
   const updateComment = (newComment) => {
-    console.log("뉴코멘트", newComment)
-    setCommentLists(commentLists.concat(newComment))
+    setCommentLists(newComment)
   }
   
   const handleTab = (index) =>{
@@ -58,7 +57,7 @@ const [likes, setLikes] = useState(0)
   return (
   <>
   {console.log("상세제품",product)}
-    {/* <div className="detail-wrapper">
+    <div className="detail-wrapper">
       {
         product.map(item => (
           <div className="details" key={item.id}>
@@ -91,8 +90,8 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div> */}
-        <div className="detail-wrapper">
+    </div>
+        {/* <div className="detail-wrapper">
       {
         product.map(item => (
           <div className="details" key={item.id}>
@@ -113,7 +112,7 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div>
+    </div> */}
 
     <Comments 
       commentLists={commentLists} 

@@ -1,34 +1,25 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import SingleComment from './SingleComment';
-
 axios.defaults.withCredentials = true;
-
-
 export default function Comments(props) {
   const [comment, setComment] = useState("")
-   
   const handleChange = (e) => {
     setComment(e.target.value)
   }
-
   const onSubmit = (e) => {
     e.preventDefault();
-
     if(comment === "") {
       alert("내용을 입력해주세요")
       return
     }
-
   const body = {
       comment: comment,
       _id: props.productId
     }
-
    console.log("댓글 보내는값", body)
-
     axios
-      .post("https://localhost:4000/products/writeComment", 
+      .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
         headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
@@ -36,7 +27,8 @@ export default function Comments(props) {
       .then(response => {
         console.log ("포스트", response.data)
         if(response.data.success) {
-          props.updateComment(response.data.data)
+          console.log(response.data)
+          props.updateComment(response.data.data.comment)
           setComment("")        
         } else {
           alert('failed to save comment')
@@ -46,9 +38,8 @@ export default function Comments(props) {
         if(err.response.status === 401) {
           alert("로그인이 필요합니다.")
       }
-    })       
+    })
   }
-
   return (
     <div>
       <br />
@@ -63,7 +54,6 @@ export default function Comments(props) {
         />
         <br />
         <button style={{ width:"20%", height:"52px"}} onClick={onSubmit}>Submit</button>
-
       </form>
       {/* comment lists */}
       {props.commentLists && props.commentLists.map((comment, index) => (
@@ -78,18 +68,3 @@ export default function Comments(props) {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

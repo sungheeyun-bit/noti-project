@@ -1,4 +1,18 @@
 import React, { useState } from "react";
+import { Card } from '../LoginPage/Section/Card'
+import {
+  Box,
+  Button,
+  Heading,
+  Stack,
+  FormControl,
+  FormLabel,
+  Input,
+  SimpleGrid,
+  Link,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import validation from "../utils/Validation";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -37,7 +51,7 @@ export default function SingupPage() {
    
     axios
       .post(
-        "https://localhost:4000/users/signup",
+        "https://projectb1.com:4000/users/signup",
         {
           nickName,
           email,
@@ -62,68 +76,87 @@ export default function SingupPage() {
       });
   };
   return (
-    <div className="container">
-      <div className="app-wrapper">
-        <h2 className="title"> sign up</h2>
-        <form className="form-wrapper">
-          <div className="nickName">
-          <br />
-             닉네임
-            <input
-              className="input"
-              type="text"
-              placeholder="닉네임을 입력해주세요"
-              onChange={handleChange("nickName")}
-            />
+    <Box
+    bg={useColorModeValue('gray.50', 'inherit')}
+    minH="100vh"
+    py="12"
+    px={{ base: '4', lg: '8' }}
+  >
+    <Box maxW="md" mx="auto">
+    <Heading textAlign="center" size="lg" fontWeight="extrabold">
+        🔔 발매 정보를 미리 받아 보세요!
+    </Heading>
+    <SimpleGrid mt="10" columns={3} spacing="3"/>
+    <Card>
+    <Stack spacing="6">
+          <FormControl id="name">
+            <FormLabel>💌 닉네임</FormLabel>
+              <Input onChange={handleChange("nickName")}
+                // value={errors.nickName}
+                name="name" 
+                type="name" 
+                placeholder="닉네임을 입력해 주세요."
+                autoComplete="" required />
+            </FormControl>
             {errors.nickName && (
               <p className="error-signup">{errors.nickName}</p>
             )}
-          </div>
-          <div className="email">
-          <br />
-             이메일
-            <input
-              className="input"
-              type="text"
-              placeholder="이메일를 입력해주세요"
-              onChange={handleChange("email")}
-            />
+        </Stack>
+
+        <SimpleGrid mt="6" columns={3} spacing="3"/>
+        <Stack spacing="6">
+          <FormControl id="email">
+            <FormLabel>💌 이메일</FormLabel>
+              <Input onChange={handleChange("email")}
+                name="email" 
+                type="email" 
+                placeholder="이메일을 입력해 주세요."
+                autoComplete="" required />
+            </FormControl>
             {errors.email && <p className="error-signup">{errors.email}</p>}
-          </div>
-          <div className="password">
-          <br />
-            🔐 비밀번호
-            <input
-              className="input"
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-              onChange={handleChange("password")}
-            />
-            {errors.password && (
-              <p className="error-signup">{errors.password}</p>
-            )}
-          </div>
-          <div className="confirmPassword">
-          <br />
-             🔐 비밀번호 확인
-            <input
-              className="input"
-              type="password"
-              placeholder="비밀번호를 다시한번 입력해주세요"
-              onChange={handleChange("confirmPassword")}
-            />
+        </Stack>
+
+        <SimpleGrid mt="6" columns={3} spacing="3"/>
+        <Stack spacing="6">
+          <FormControl id="password">
+            <FormLabel> 🔐 비밀번호</FormLabel>
+              <Input onChange={handleChange("password")}
+                name="password" 
+                type="password" 
+                placeholder="비밀번호를 입력해 주세요."
+                autoComplete="" required />
+            </FormControl>
+            {errors.password && (<p className="error-signup">{errors.password}</p> )}
+        </Stack>
+
+        <SimpleGrid mt="6" columns={3} spacing="3"/>
+        <Stack spacing="6">
+          <FormControl id="password">
+            <FormLabel> 🔐 비밀번호 확인 </FormLabel>
+              <Input onChange={handleChange("confirmPassword")}
+                name="confirmPassword"
+                type="password"
+                placeholder="비밀번호를 다시한번 입력해 주세요."
+                autoComplete="" required />
+            </FormControl>
             {errors.confirmPassword && (
               <p className="error-signup">{errors.confirmPassword}</p>
             )}
-          </div>
-          <div>
-          <br />
-            <button className="btn-singup" onClick={handleSignup}>
+        </Stack>
+
+           <SimpleGrid mt="6" columns={3} spacing="3"/>
+          <Button
+              onClick={handleSignup}  
+              type="submit" 
+              colorScheme="purple" 
+              width="full"
+              fontSize="md">
               회원가입하기
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+          </Button>
+          <SimpleGrid mt="6" columns={3} spacing="3"/>
+    </Card>
+    </Box>
+    </Box>
+    
   );
 }

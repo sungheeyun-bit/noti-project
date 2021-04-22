@@ -1,8 +1,6 @@
 import React from 'react'
 import Likes from './Likes'
-
 export default function SingleComment(props) {
-console.log("싱글코멘트", props)
   return (
     <div>
       <li className="contents" style={{listStyle: "none"}}>
@@ -13,6 +11,8 @@ console.log("싱글코멘트", props)
           commentId={props.comment._id}
           productId={props.productId}
           updateLikes={props.updateLikes}
+          state={props.comment.state}
+          goodCount={props.comment.goodCount}
           />
       </li>
     </div>
