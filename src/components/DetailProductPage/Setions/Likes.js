@@ -15,7 +15,7 @@ export default function Likes(props) {
       comment_id: props.commentId
     }
 
-    axios.patch(`https://localhost:4000/products/good`, body, 
+    axios.patch(`https://projectb1.com:4000/products/good`, body, 
       {
         headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
       })

@@ -50,8 +50,9 @@ const [likes, setLikes] = useState(0)
     
   return (
   <>
-    {/* <div className="detail-wrapper">
+    <div className="detail-wrapper">
       {
+        
         product.map(item => (
           <div className="details" key={item.id}>
             <div className="big-img">
@@ -61,6 +62,10 @@ const [likes, setLikes] = useState(0)
               <div className="row">
                  <h2>{item.productName}</h2>
               </div>
+              <div className="row">
+                <span>브랜드 사이트</span> 
+              <a href={item.brand}><i class="fas fa-external-link-alt"></i></a>
+              </div>              
               <div className="row">
                 <span>발매일</span> 
                 <span style={{fontWeight:"500"}}>{item.releaseString}</span> 
@@ -82,8 +87,9 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div> */}
-    <div className="detail-wrapper">
+      {console.log("상세페이지",product)}
+    </div> 
+    {/* <div className="detail-wrapper">
       {
         product.map(item => (
           <div className="details" key={item.id}>
@@ -103,7 +109,7 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div>
+    </div> */}
 
     <Comments 
       commentLists={commentLists} 

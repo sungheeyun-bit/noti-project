@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import "../../Navbar.css";
 import axios from "axios";
 
-export default function Navbar({ loginHandler, handleLogout, isLogin }){
+export default function Navbar({ loginHandler, handleLogout, isLogin, alarmList }){
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -18,18 +18,7 @@ export default function Navbar({ loginHandler, handleLogout, isLogin }){
             className="nav-logo"
             style={{textDecoration: "none", color: "black"}}>
             NOTI
-          </Link>
-          {/* 테스트를 위한 알림 리스트 탭 입니다 */}
-          <Badge count={5}>
-          <Link exact to="/user/alarmpage"
-            activeClassName="active"
-            className="nav-links"
-            onClick={handleClick}
-            >
-              알림
-          </Link>
-          </Badge>
-          {/* 테스트를 위한 알림 리스트 탭 입니다 */}         
+          </Link>     
           <ul className={click ? "nav-menu active" : "nav-menu"}>
              {isLogin ? (
             <>

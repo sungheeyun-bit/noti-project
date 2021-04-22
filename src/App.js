@@ -32,11 +32,12 @@ function App() {
   const handleLogout = () => {
     setIsLogin(false);
     setAccessToken("");
+    window.localStorage.removeItem("userToken")
   }
 
+  const userToken = window.localStorage.getItem("userToken")
+  
   const [productList, setProductList] = useState([])
-  const [alarmList, setAlarmList] = useState([])
-  const [leftDay, setLeftDay] = useState("")
 
   useEffect(() => {
     axios
@@ -49,9 +50,15 @@ function App() {
             alert(" 상품들을 가져오는데 실패 했습니다.")
           }
         })
-    },[])
 
-  const addToCart = (productId) => {
+      if(userToken){
+        setIsLogin(true)
+      }
+    }, [])
+
+
+
+    const addToCart = (productId) => {
     console.log("리스트저장아이디", productId)
    
     const goToList = productList.filter((el) => el._id === productId)[0]
@@ -89,15 +96,13 @@ function App() {
   }
 
   
-return (
-  
+return (  
     <Router>
      <ChakraProvider>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
-        isLogin={isLogin}
-        alarmList={alarmList}
+        isLogin={isLogin}      
       />
       <Switch>
       <Route exact path="/">
@@ -125,8 +130,7 @@ return (
           render={(props) =>  <DetailProductPage accessToken={accessToken} {...props} />} />
       </Switch>
       </ChakraProvider>
-    </Router>
-    
+    </Router>    
   );
 }
 export default App;
