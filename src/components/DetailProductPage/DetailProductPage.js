@@ -4,22 +4,18 @@ import Comments from './Setions/Comments';
 import '../../DetailProductPage.css';
 
 export default function DetailProductPage(props) {
-  
-console.log('props가 뭐니', props)
+
 const productId = props.match.params.productId
   
 const [product, setProduct] = useState([])
 const [commentLists, setCommentLists] = useState([])
 
-
 const [likes, setLikes] = useState(0)
 
   useEffect(() => {
-    
     axios
-      .get(`https://localhost:4000/products/detailProduct?id=${productId}`)
+      .get(`https://projectb1.com:4000/products/detailProduct?id=${productId}`)
         .then(response => {
-          console.log("상세페이지", response.data)
           if(response.data.success){
             console.log('res.data', response.data.data)
             setProduct(response.data.data)
@@ -28,8 +24,7 @@ const [likes, setLikes] = useState(0)
             alert('상세 정보 가져오기를 실패했습니다')
           }
         })
-
-      }, [])
+  }, [])
 
   const [index, setIndex] = useState(0)
 
@@ -37,13 +32,11 @@ const [likes, setLikes] = useState(0)
 
 
   const updateLikes = (newLike) => {
-    console.log("뉴라이크", newLike)
     setLikes(newLike)
   }
 
   const updateComment = (newComment) => {
-    console.log("뉴코멘트", newComment)
-    setCommentLists(commentLists.concat(newComment))
+    setCommentLists(newComment)
   }
   
   const handleTab = (index) =>{
@@ -57,9 +50,9 @@ const [likes, setLikes] = useState(0)
     
   return (
   <>
-  {console.log("상세제품",product)}
-    {/* <div className="detail-wrapper">
+    <div className="detail-wrapper">
       {
+        
         product.map(item => (
           <div className="details" key={item.id}>
             <div className="big-img">
@@ -68,8 +61,11 @@ const [likes, setLikes] = useState(0)
             <div className="info">
               <div className="row">
                  <h2>{item.productName}</h2>
-                  <i class="far fa-bell"></i>
               </div>
+              <div className="row">
+                <span>브랜드 사이트</span> 
+              <a href={item.brand}><i class="fas fa-external-link-alt"></i></a>
+              </div>              
               <div className="row">
                 <span>발매일</span> 
                 <span style={{fontWeight:"500"}}>{item.releaseString}</span> 
@@ -91,15 +87,15 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div> */}
-        <div className="detail-wrapper">
+      {console.log("상세페이지",product)}
+    </div> 
+    {/* <div className="detail-wrapper">
       {
         product.map(item => (
           <div className="details" key={item.id}>
             <div className="info">
               <div className="row">
                  <h2>{item.productName}</h2>
-                  <i class="far fa-bell"></i>
               </div>
               <div className="row">
                 <span>발매일</span> 
@@ -113,7 +109,7 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-    </div>
+    </div> */}
 
     <Comments 
       commentLists={commentLists} 
@@ -121,7 +117,7 @@ const [likes, setLikes] = useState(0)
       accessToken={props.accessToken}
       updateComment={updateComment} 
       updateLikes={updateLikes}
-      />
+    />
   </>   
   )
 }

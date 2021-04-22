@@ -8,6 +8,8 @@ axios.defaults.withCredentials = true;
 export default function Comments(props) {
   const [comment, setComment] = useState("")
    
+  
+  
   const handleChange = (e) => {
     setComment(e.target.value)
   }
@@ -28,7 +30,7 @@ export default function Comments(props) {
    console.log("댓글 보내는값", body)
 
     axios
-      .post("https://localhost:4000/products/writeComment", 
+      .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
         headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
@@ -36,7 +38,8 @@ export default function Comments(props) {
       .then(response => {
         console.log ("포스트", response.data)
         if(response.data.success) {
-          props.updateComment(response.data.data)
+          console.log(response.data)
+          props.updateComment(response.data.data.comment)
           setComment("")        
         } else {
           alert('failed to save comment')
@@ -46,7 +49,7 @@ export default function Comments(props) {
         if(err.response.status === 401) {
           alert("로그인이 필요합니다.")
       }
-    })       
+    })
   }
 
   return (
@@ -66,6 +69,7 @@ export default function Comments(props) {
 
       </form>
       {/* comment lists */}
+    
       {props.commentLists && props.commentLists.map((comment, index) => (
           <SingleComment 
             key={index}
