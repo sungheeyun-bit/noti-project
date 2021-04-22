@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card } from './Section/Card'
-// import { useHistory, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import GoogleLogin from "react-google-login";
 import "./LoginPage.css";
@@ -50,6 +49,7 @@ export default function LoginPage({ loginHandler }) {
     .then(res => {
       history.push("/");
       loginHandler(res.data)
+      window.localStorage.setItem("userToken", res.data.data )
     })
     .catch(err => {
       console.log(err.message);
@@ -62,7 +62,7 @@ export default function LoginPage({ loginHandler }) {
     if (response.profileObj) {
       axios
         .post(
-          "https://localhost:4000/users/socialLogin",
+          "https://projectb1.com:4000/users/socialLogin",
           {
             email: response.profileObj.email,
             nickName: response.profileObj.name,
@@ -74,6 +74,7 @@ export default function LoginPage({ loginHandler }) {
           }
         )
         .then((res) => {
+          console.log(res)
           setUser(response.profileObj);
           history.push("/");
         });

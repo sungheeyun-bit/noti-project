@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export default function Likes(props) {
+
   const [likeCount, setLikeCount] = useState(props.goodCount);
   const [action, setAction] = useState(props.state);
+
   const onLikeClick = () => {
+
     const body = {
       id: props.productId,
       comment_id: props.commentId
@@ -28,6 +31,8 @@ export default function Likes(props) {
       }
     })    
   }
+
+
   return (
     <div className="like-icon">
       <div onClick={onLikeClick}>
@@ -37,3 +42,7 @@ export default function Likes(props) {
     </div>
   )
 }
+
+
+
+

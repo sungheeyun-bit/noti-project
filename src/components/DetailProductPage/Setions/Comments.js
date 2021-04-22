@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import SingleComment from './SingleComment';
+
 axios.defaults.withCredentials = true;
+
 export default function Comments(props) {
   const [comment, setComment] = useState("")
   const handleChange = (e) => {
@@ -56,6 +58,7 @@ export default function Comments(props) {
         <button style={{ width:"20%", height:"52px"}} onClick={onSubmit}>Submit</button>
       </form>
       {/* comment lists */}
+    
       {props.commentLists && props.commentLists.map((comment, index) => (
           <SingleComment 
             key={index}

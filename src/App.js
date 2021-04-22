@@ -1,83 +1,3 @@
-// import React, { useState, createContext, useEffect, useReducer } from "react";
-// import { ChakraProvider } from "@chakra-ui/react"
-// import {
-//   BrowserRouter as Router, 
-//   Route, 
-//   Switch 
-// } from 'react-router-dom';
-// import LoginPage from './components/LoginPage/LoginPage';
-// import SignupPage from './components/SignupPage/SignupPage';
-// import Navbar from './components/Navbar/Navbar';
-// import DetailProductPage from './components/DetailProductPage/DetailProductPage';
-// import ModifiedPage from './components/ModifiedPage/ModifiedPage';
-// import { initialState } from './assets/state';
-// import axios from "axios";
-// import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
-// import LandingPage from "./components/LandingPage/LandingPage";
-// import AlarmPage from "./components/AlarmPage/AlarmPage";
-
-// export const ProductsContext = createContext();
-// axios.defaults.withCredentials = true;
-
-// function App() {
-
-//   const [isLogin, setIsLogin] = useState(false);
-//   const [accessToken, setAccessToken] = useState("");
-//   const loginHandler = (data) => {
-//     setIsLogin(true)
-//     issueAccessToken(data.data);
-//   };
-//   const issueAccessToken = (token) => {
-//    setAccessToken(token);
-//    console.log("토큰", token)  
-//   }
-//   const handleLogout = () => {
-//     setIsLogin(false);
-//     setAccessToken("");
-//   }
-
-//   return (
-    
-//     <Router>
-//      <ChakraProvider>
-//       <Navbar 
-//         loginHandler={loginHandler}
-//         handleLogout={handleLogout}
-//         isLogin={isLogin}
-//         // setProducts={setProducts}
-//       />
-//       <Switch>
-//       {/* <Route exact path="/" component={LandingPage} /> */}
-//       <Route exact path="/">
-//       <LandingPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
-//       </Route>
-//       {/* <Route exact path="/user/alarmpage" component={AlarmPage} /> */}
-//       <Route exact path="/user/alarmpage">
-//         <AlarmPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
-//       </Route>
-//         <Route exact path="/login">
-//           <LoginPage loginHandler={loginHandler} /> 
-//         </Route>
-//         <Route exact path="/signup" component={SignupPage} />
-//         <Route exact path="/product/upload" component={UploadProdctPage} />
-//         {/* <Route path="/" exact={true} component={LandingPage} /> */}
-//         <Route path="/modified">
-//           <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
-//         </Route> 
-//         <Route 
-//           path="/product/:productId" 
-//           render={(props) =>  <DetailProductPage accessToken={accessToken} issueAccessToken={issueAccessToken} {...props} />} />
-//       </Switch>
-//       </ChakraProvider>
-//     </Router>
-    
-//   );
-// }
-// export default App;
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react"
 import {
@@ -95,7 +15,6 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import AlarmPage from "./components/AlarmPage/AlarmPage";
 import axios from "axios";
 
-
 axios.defaults.withCredentials = true;
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -111,10 +30,13 @@ function App() {
   const handleLogout = () => {
     setIsLogin(false);
     setAccessToken("");
+    window.localStorage.removeItem("userToken")
   }
+
+  const userToken = window.localStorage.getItem("userToken")
+  
   const [productList, setProductList] = useState([])
-  const [alarmList, setAlarmList] = useState([])
-  const [leftDay, setLeftDay] = useState("")
+
   useEffect(() => {
     axios
       .get("https://projectb1.com:4000/products/filterProductList")
@@ -126,9 +48,17 @@ function App() {
             alert(" 상품들을 가져오는데 실패 했습니다.")
           }
         })
-    },[])
-  const addToCart = (productId) => {
+
+      if(userToken){
+        setIsLogin(true)
+      }
+    }, [])
+
+
+
+    const addToCart = (productId) => {
     console.log("리스트저장아이디", productId)
+   
     const goToList = productList.filter((el) => el._id === productId)[0]
     console.log("고투", goToList)
     const body = goToList
@@ -151,6 +81,7 @@ function App() {
         }
       })
   }
+
   const updateSearchTerm = (newSearchTerm) => {
     axios
       .get(`https://projectb1.com:4000/products/searchProduct?searchTerm=${newSearchTerm}`,
@@ -161,14 +92,15 @@ function App() {
           setProductList(response.data.data)
     })  
   }
-return (
+
+  
+return (  
     <Router>
      <ChakraProvider>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
-        isLogin={isLogin}
-        alarmList={alarmList}
+        isLogin={isLogin}      
       />
       <Switch>
       <Route exact path="/">
@@ -196,7 +128,7 @@ return (
           render={(props) =>  <DetailProductPage accessToken={accessToken} {...props} />} />
       </Switch>
       </ChakraProvider>
-    </Router>
+    </Router>    
   );
 }
 export default App;
