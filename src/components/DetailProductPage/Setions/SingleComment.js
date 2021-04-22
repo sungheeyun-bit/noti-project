@@ -7,7 +7,6 @@ export default function SingleComment(props) {
         <div className="nickName" style={{fontWeight:"500"}}>{props.comment.nickName}</div> 
         <div className="content">{props.comment.content}</div> 
         <Likes 
-          accessToken={props.accessToken}
           commentId={props.comment._id}
           productId={props.productId}
           updateLikes={props.updateLikes}

@@ -16,24 +16,25 @@ import AlarmPage from "./components/AlarmPage/AlarmPage";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  // const [accessToken, setAccessToken] = useState("");
   const loginHandler = (data) => {
     setIsLogin(true)
-    issueAccessToken(data.data);
+    // issueAccessToken(data.data);
   };
-  const issueAccessToken = (token) => {
-   setAccessToken(token);
-   console.log("토큰", token)  
-  }
+  // const issueAccessToken = (token) => {
+  //  setAccessToken(token);
+  //  console.log("토큰", token)  
+  // }
   const handleLogout = () => {
     setIsLogin(false);
-    setAccessToken("");
+    // setAccessToken("");
     window.localStorage.removeItem("userToken")
   }
 
-  const userToken = window.localStorage.getItem("userToken")
+  const accessToken = window.localStorage.getItem("userToken")
   
   const [productList, setProductList] = useState([])
 
@@ -49,16 +50,13 @@ function App() {
           }
         })
 
-      if(userToken){
+      if(accessToken){
         setIsLogin(true)
       }
     }, [])
 
 
-
-    const addToCart = (productId) => {
-    console.log("리스트저장아이디", productId)
-   
+    const addToCart = (productId) => { 
     const goToList = productList.filter((el) => el._id === productId)[0]
     console.log("고투", goToList)
     const body = goToList
@@ -111,9 +109,7 @@ return (
         />
       </Route>
       <Route exact path="/user/alarmpage">
-        <AlarmPage 
-          accessToken={accessToken} 
-        />
+        <AlarmPage/>
       </Route>
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
@@ -121,11 +117,11 @@ return (
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
         <Route path="/modified">
-          <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+          <ModifiedPage/>
         </Route> 
         <Route 
           path="/product/:productId" 
-          render={(props) =>  <DetailProductPage accessToken={accessToken} {...props} />} />
+          render={(props) =>  <DetailProductPage {...props} />} />
       </Switch>
       </ChakraProvider>
     </Router>    

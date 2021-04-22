@@ -56,7 +56,7 @@ const [likes, setLikes] = useState(0)
         product.map(item => (
           <div className="details" key={item.id}>
             <div className="big-img">
-              <img src={item.images[index]} alt="" />
+              <img src={`https://projectb1.com:4000/${item.images[index]}`} alt="" />
             </div>
             <div className="info">
               <div className="row">
@@ -77,7 +77,7 @@ const [likes, setLikes] = useState(0)
               <div className="thumb" ref={myRef}>
                 {
                   item.images.map((image, index) => (
-                    <img src={image} alt="" key={index} 
+                    <img src={`https://projectb1.com:4000/${image}`} alt="" key={index} 
                     onClick={()=> handleTab(index)}
                     />
                   ))

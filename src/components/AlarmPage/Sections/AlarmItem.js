@@ -4,8 +4,10 @@ import axios from "axios";
  
 
 
-export default function AlarmItem({ item, handleDelete, accessToken }) {
+export default function AlarmItem({ item, handleDelete}) {
 
+
+  const accessToken = window.localStorage.getItem('userToken')
 
       const alarmSetting = (productId) => {
         
