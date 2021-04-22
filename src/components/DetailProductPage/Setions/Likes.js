@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import axios from 'axios';
+import swal from "sweetalert";
+
 axios.defaults.withCredentials = true;
 export default function Likes(props) {
 
@@ -29,7 +32,10 @@ export default function Likes(props) {
       })
       .catch((err) =>{
         if(err.response.status === 401) {
-          alert("로그인이 필요합니다.")
+          swal({
+           title: "로그인이 필요합니다.",
+           icon: "warning",
+        })     
       }
     })    
   }
@@ -38,7 +44,10 @@ export default function Likes(props) {
   return (
     <div className="like-icon">
       <div onClick={onLikeClick}>
-        <i className= {action=== 0 ? "far fa-heart" : "fas fa-heart"}></i>
+        
+        <span>{action=== 0 ? 
+          <IoMdHeartEmpty  size="25"/> :
+          <IoMdHeart size="25" color="rgb(201, 89, 113)" />}</span>
         <span className="like-count">{likeCount}</span>
       </div>
     </div>
