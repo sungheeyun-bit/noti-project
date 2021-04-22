@@ -6,6 +6,8 @@ export default function Likes(props) {
   const [likeCount, setLikeCount] = useState(props.goodCount);
   const [action, setAction] = useState(props.state);
 
+  const accessToken = window.localStorage.getItem('userToken')
+
   const onLikeClick = () => {
 
     const body = {
@@ -14,7 +16,7 @@ export default function Likes(props) {
     }
     axios.patch(`https://projectb1.com:4000/products/good`, body, 
       {
-        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+        headers: { "Content-Type": "application/json" , "okCome": accessToken}
       })
       .then(response => {
         const comments = response.data.data.comment

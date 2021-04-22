@@ -58,7 +58,7 @@ export default function LoginPage({ loginHandler }) {
   }
 
   const handleLoginSuccess = (response) => {
-    console.log("구글로그인", response.profileObj)
+    console.log("구글로그인", response.accessToken)
     if (response.profileObj) {
       axios
         .post(
@@ -75,6 +75,8 @@ export default function LoginPage({ loginHandler }) {
         )
         .then((res) => {
           console.log(res)
+          window.localStorage.setItem("userToken", res.data.data )
+          loginHandler(res.data)
           setUser(response.profileObj);
           history.push("/");
         });

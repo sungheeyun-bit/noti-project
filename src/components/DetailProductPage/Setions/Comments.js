@@ -5,6 +5,8 @@ import SingleComment from './SingleComment';
 axios.defaults.withCredentials = true;
 
 export default function Comments(props) {
+  const accessToken = window.localStorage.getItem('userToken')
+
   const [comment, setComment] = useState("")
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -24,7 +26,7 @@ export default function Comments(props) {
       .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
-        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
+        headers: { "Content-Type": "application/json" , "okCome": accessToken}, 
       })
       .then(response => {
         console.log ("포스트", response.data)
@@ -49,10 +51,10 @@ export default function Comments(props) {
       {/* root comment form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
         <textarea 
-          style={{ width: "100%", borderRadius: "5px"}}
+          // style={{ width: "100%", borderRadius: "5px"}}
           onChange={handleChange}
           value={comment}
-          placeholder="코멘트를 작성해 주세요."  
+          placeholder="로그인 후 코멘트를 작성할 수 있습니다."  
         />
         <br />
         <button style={{ width:"20%", height:"52px"}} onClick={onSubmit}>Submit</button>
@@ -64,7 +66,6 @@ export default function Comments(props) {
             key={index}
             comment={comment} 
             productId={props.productId} 
-            accessToken={props.accessToken}
             updateLikes={props.updateLikes}
          />
       ))}
