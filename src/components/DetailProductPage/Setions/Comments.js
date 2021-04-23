@@ -1,11 +1,16 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import SingleComment from './SingleComment';
+import './Comments.css'
+import { IconButton, Input } from "@chakra-ui/react"
+import { ChatIcon } from '@chakra-ui/icons'
+import swal from "sweetalert";
+
 
 axios.defaults.withCredentials = true;
 
 export default function Comments(props) {
-  const accessToken = window.localStorage.getItem('userToken')
+  // const accessToken = window.localStorage.getItem('userToken')
 
   const [comment, setComment] = useState("")
   const handleChange = (e) => {
@@ -14,7 +19,7 @@ export default function Comments(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     if(comment === "") {
-      alert("내용을 입력해주세요")
+       swal("Oops", "내용을 입력해주세요.", "error")
       return
     }
   const body = {
@@ -26,7 +31,7 @@ export default function Comments(props) {
       .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
-        headers: { "Content-Type": "application/json" , "okCome": accessToken}, 
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
       })
       .then(response => {
         console.log ("포스트", response.data)
@@ -40,35 +45,58 @@ export default function Comments(props) {
        })
       .catch((err) =>{
         if(err.response.status === 401) {
-          alert("로그인이 필요합니다.")
+          swal({
+           title: "로그인이 필요합니다.",
+           icon: "warning",
+        })            
       }
     })
   }
+  
   return (
-    <div>
+    <div> 
+      <div className="container" 
+      style={{ maxWidth:"1200px", 
+               width:"100%", 
+               margin:"100px auto",
+               boxShadow:"0 0 5px #ccc",
+               borderRadius:"30px",
+              }}> 
       <br />
-      <p> replies</p>
-      {/* root comment form */}
-      <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <textarea 
-          // style={{ width: "100%", borderRadius: "5px"}}
-          onChange={handleChange}
-          value={comment}
-          placeholder="로그인 후 코멘트를 작성할 수 있습니다."  
-        />
-        <br />
-        <button style={{ width:"20%", height:"52px"}} onClick={onSubmit}>Submit</button>
-      </form>
+      <div className="commentbox" style={{margin:"30px 110px"}}> 
+      {/* <p> replies</p> */}
+        <form style={{ display: "flex" }} onSubmit={onSubmit}>
+          <br />
+          <Input 
+            focusBorderColor="purple.400"
+            variant="outline" 
+            placeholder="로그인 후 코멘트를 작성할 수 있습니다."
+            onChange={handleChange}
+            value={comment}
+            size="lg"
+          />
+          <IconButton
+            onClick={onSubmit}
+            colorScheme="purple"
+            aria-label="submit"
+            size="lg"
+            icon={<ChatIcon />}
+         />
+        </form>
+      </div>
       {/* comment lists */}
     
-      {props.commentLists && props.commentLists.map((comment, index) => (
-          <SingleComment 
-            key={index}
-            comment={comment} 
-            productId={props.productId} 
-            updateLikes={props.updateLikes}
-         />
-      ))}
+        {props.commentLists && props.commentLists.map((comment, index) => (
+            <SingleComment 
+              key={index}
+              comment={comment} 
+              productId={props.productId} 
+              updateLikes={props.updateLikes}
+              accessToken={props.accessToken}
+            />
+          ))}
+        </div>  
     </div>
+
   )
 }

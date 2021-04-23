@@ -62,6 +62,7 @@ const [likes, setLikes] = useState(0)
               <div className="row">
                  <h2>{item.productName}</h2>
               </div>
+              <br />
               <div className="row">
                 <span>브랜드 사이트</span> 
               <a href={item.brand}><i class="fas fa-external-link-alt"></i></a>
@@ -87,8 +88,9 @@ const [likes, setLikes] = useState(0)
           </div>
         ))
       }
-      {console.log("상세페이지",product)}
     </div> 
+     {/* <div className="comments-wrapper" 
+      style={{ maxWidth:"1200px", width:"100%", border:"bold"}} >  */}
 
     <Comments 
       commentLists={commentLists} 
@@ -97,6 +99,7 @@ const [likes, setLikes] = useState(0)
       updateComment={updateComment} 
       updateLikes={updateLikes}
     />
+    {/* </div> */}
   </>   
   )
 }

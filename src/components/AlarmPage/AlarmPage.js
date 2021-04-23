@@ -3,13 +3,13 @@ import axios from "axios";
 import Toast from '../LandingPage/Sections/Toast'
 import AlarmItem from './Sections/AlarmItem';
 
-function AlarmPage() {
+function AlarmPage({ accessToken }) {
  
   const [alarmList, setAlarmList] = useState([])
   const [leftDay, setLeftDay] = useState("")
   const [productName, setProductName] = useState("")
 
-  const accessToken = window.localStorage.getItem('userToken')
+  // const accessToken = window.localStorage.getItem('userToken')
 
   console.log("알림페이지토큰", accessToken)
 
