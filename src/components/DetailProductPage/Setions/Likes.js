@@ -2,24 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import axios from 'axios';
 import swal from "sweetalert";
-
 axios.defaults.withCredentials = true;
 export default function Likes(props) {
-
   const [likeCount, setLikeCount] = useState(props.goodCount);
   const [action, setAction] = useState(props.state);
-
-  // const accessToken = window.localStorage.getItem('userToken')
-
+  const accessToken = window.localStorage.getItem('userToken')
   const onLikeClick = () => {
-
     const body = {
       id: props.productId,
       comment_id: props.commentId
     }
     axios.patch(`https://projectb1.com:4000/products/good`, body, 
       {
-        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}
+        headers: { "Content-Type": "application/json" , "okCome": accessToken}
       })
       .then(response => {
         const comments = response.data.data.comment
@@ -39,12 +34,9 @@ export default function Likes(props) {
       }
     })    
   }
-
-
   return (
     <div className="like-icon">
       <div onClick={onLikeClick}>
-        
         <span>{action=== 0 ? 
           <IoMdHeartEmpty  size="25"/> :
           <IoMdHeart size="25" color="rgb(201, 89, 113)" />}</span>
@@ -53,7 +45,3 @@ export default function Likes(props) {
     </div>
   )
 }
-
-
-
-

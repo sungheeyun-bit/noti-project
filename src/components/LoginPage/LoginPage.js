@@ -20,22 +20,16 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 axios.defaults.withCredentials = true;
- 
 export default function LoginPage({ loginHandler }) {
-  
   const [details, setDetails] = useState({email: "", password: ""})
   const [user, setUser] = useState(null);
   const history = useHistory();
-
   const submitHandler = (e) =>{
     e.preventDefault();
- 
     const { email, password } = details;
-
     if(!email || !password){
       return swal("Oops", "모든 항목은 필수입니다.", "error");
     }
-    
     axios.post("https://projectb1.com:4000/users/login", 
     {
       email,
@@ -47,20 +41,15 @@ export default function LoginPage({ loginHandler }) {
       }
     })
     .then(res => {
-      console.log("로그인", res)
       history.push("/");
       loginHandler(res.data)
-      // window.localStorage.setItem("userToken", res.data.data)
-      window.localStorage.setItem("token", res.data.data)
-
-      console.log("로그인", res)
+      window.localStorage.setItem("userToken", res.data.data )
     })
     .catch(err => {
       console.log(err.message);
       alert(err.message)
     })
   }
-
   const handleLoginSuccess = (response) => {
     console.log("구글로그인", response.accessToken)
     if (response.profileObj) {
@@ -79,18 +68,16 @@ export default function LoginPage({ loginHandler }) {
         )
         .then((res) => {
           console.log(res)
-          // window.localStorage.setItem("userToken", res.data.data )
+          window.localStorage.setItem("userToken", res.data.data )
           loginHandler(res.data)
           setUser(response.profileObj);
           history.push("/");
         });
     }
   };
-
    const handleLoginFailure = (error) => {
     console.log(error);
   };
-
   return (
     <Box
     bg={useColorModeValue('gray.50', 'inherit')}
@@ -116,32 +103,28 @@ export default function LoginPage({ loginHandler }) {
                 placeholder="이메일을 입력해주세요."
                 autoComplete="email" required />
             </FormControl>
-
         </Stack>
           <SimpleGrid mt="6" columns={3} spacing="3"/>
           <FormControl id="email">
            <FormLabel>🔐 비밀번호</FormLabel>
               <Input onChange={(e) => setDetails({...details, password: e.target.value})}
-                value={details.password}
-                name="email" 
-                type="password"
-                placeholder="비밀번호를 입력해주세요."
-                autoComplete="email" required />
+              value={details.password}
+              name="email" 
+              type="password"
+              placeholder="비밀번호를 입력해주세요."
+              autoComplete="email" required />
            </FormControl>
-
            <SimpleGrid mt="6" columns={3} spacing="3"/>
-            <Button
-                onClick={submitHandler}  
-                type="submit" 
-                colorScheme="purple" 
-                // size="lg"
-                width="full"
-                fontSize="md">
-                이메일로 시작하기
-            </Button>
-
+          <Button
+              onClick={submitHandler}  
+              type="submit" 
+              colorScheme="purple" 
+              // size="lg"
+              width="full"
+              fontSize="md">
+              이메일로 시작하기
+          </Button>
           <SimpleGrid mt="6" columns={3} spacing="3"/>
-          
           <GoogleLogin
             buttonSize="320px"
             className="btn-google"

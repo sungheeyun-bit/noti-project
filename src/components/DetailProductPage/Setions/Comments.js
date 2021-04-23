@@ -1,16 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import SingleComment from './SingleComment';
+import './Comments.css'
 import { IconButton, Input } from "@chakra-ui/react"
 import { ChatIcon } from '@chakra-ui/icons'
 import swal from "sweetalert";
-
-
 axios.defaults.withCredentials = true;
-
 export default function Comments(props) {
-  // const accessToken = window.localStorage.getItem('userToken')
-
+  const accessToken = window.localStorage.getItem('userToken')
   const [comment, setComment] = useState("")
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -30,7 +27,7 @@ export default function Comments(props) {
       .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
-        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
+        headers: { "Content-Type": "application/json" , "okCome": accessToken}, 
       })
       .then(response => {
         console.log ("포스트", response.data)
@@ -51,7 +48,6 @@ export default function Comments(props) {
       }
     })
   }
-  
   return (
     <div> 
       <div className="container" 
@@ -84,18 +80,15 @@ export default function Comments(props) {
         </form>
       </div>
       {/* comment lists */}
-    
         {props.commentLists && props.commentLists.map((comment, index) => (
             <SingleComment 
               key={index}
               comment={comment} 
               productId={props.productId} 
               updateLikes={props.updateLikes}
-              accessToken={props.accessToken}
             />
           ))}
         </div>  
     </div>
-
   )
 }

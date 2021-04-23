@@ -2,16 +2,11 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import Comments from './Setions/Comments';
 import '../../DetailProductPage.css';
-
 export default function DetailProductPage(props) {
-
 const productId = props.match.params.productId
-  
 const [product, setProduct] = useState([])
 const [commentLists, setCommentLists] = useState([])
-
 const [likes, setLikes] = useState(0)
-
   useEffect(() => {
     axios
       .get(`https://projectb1.com:4000/products/detailProduct?id=${productId}`)
@@ -25,20 +20,14 @@ const [likes, setLikes] = useState(0)
           }
         })
   }, [])
-
   const [index, setIndex] = useState(0)
-
   const myRef = useRef(null)
-
-
   const updateLikes = (newLike) => {
     setLikes(newLike)
   }
-
   const updateComment = (newComment) => {
     setCommentLists(newComment)
   }
-  
   const handleTab = (index) =>{
     setIndex(index)
     const images = myRef.current.children;
@@ -47,12 +36,10 @@ const [likes, setLikes] = useState(0)
     }
     images[index].className = "active";
   }
-    
   return (
   <>
     <div className="detail-wrapper">
       {
-        
         product.map(item => (
           <div className="details" key={item.id}>
             <div className="big-img">
@@ -91,7 +78,6 @@ const [likes, setLikes] = useState(0)
     </div> 
      {/* <div className="comments-wrapper" 
       style={{ maxWidth:"1200px", width:"100%", border:"bold"}} >  */}
-
     <Comments 
       commentLists={commentLists} 
       productId={productId} 
@@ -103,6 +89,3 @@ const [likes, setLikes] = useState(0)
   </>   
   )
 }
-
-
-

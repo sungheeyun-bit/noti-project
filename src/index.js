@@ -2,14 +2,12 @@
 // import ReactDOM from "react-dom";
 // import "./index.css";
 // import App from "./App";
-
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App />
 //   </React.StrictMode>,
 //   document.getElementById("root")
 // );
-
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
 import 'core-js';
@@ -25,11 +23,8 @@ import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { ChakraProvider } from "@chakra-ui/react"
-
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
-
 ReactDOM.render(
-    
     <Provider
         store={createStoreWithMiddleware(
             Reducer,
