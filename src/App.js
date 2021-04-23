@@ -14,26 +14,30 @@ import UploadProdctPage from './components/UploadProductPage/UploadProdctPage';
 import LandingPage from "./components/LandingPage/LandingPage";
 import AlarmPage from "./components/AlarmPage/AlarmPage";
 import axios from "axios";
+import swal from "sweetalert";
 
 axios.defaults.withCredentials = true;
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+
   const loginHandler = (data) => {
     setIsLogin(true)
     issueAccessToken(data.data);
   };
+
   const issueAccessToken = (token) => {
    setAccessToken(token);
-   console.log("토큰", token)  
-  }
-  const handleLogout = () => {
-    setIsLogin(false);
-    setAccessToken("");
-    window.localStorage.removeItem("userToken")
+   console.log("토큰 생성", token)  
   }
 
-  const userToken = window.localStorage.getItem("userToken")
+  const handleLogout = () => {
+    setIsLogin(false);
+     setAccessToken("");
+  }
+
+  console.log("토큰 풀림", accessToken)
   
   const [productList, setProductList] = useState([])
 
@@ -49,16 +53,13 @@ function App() {
           }
         })
 
-      if(userToken){
+      if(accessToken){
         setIsLogin(true)
       }
     }, [])
 
 
-
-    const addToCart = (productId) => {
-    console.log("리스트저장아이디", productId)
-   
+    const addToCart = (productId) => { 
     const goToList = productList.filter((el) => el._id === productId)[0]
     console.log("고투", goToList)
     const body = goToList
@@ -70,14 +71,21 @@ function App() {
       })
         .then((response) => {
           if(response.status === 201){
-            alert("저장되었습니다")
+            swal({
+              title: "Good job!",
+              text: "알림 리스트로 저장되었습니다.",
+              icon: "success",
+            });            
           }
       })
       .catch((err) => {
         if(err.response.status === 400){
-          alert("이미 리스트에 저장된 상품입니다")
+          swal("Oops", "이미 등록된 알람입니다.", "error")
         } else if(err.response.status === 404) {
-          alert("로그인이 필요합니다.")
+           swal({
+           title: "로그인이 필요합니다.",
+           icon: "warning",
+          })
         }
       })
   }
@@ -111,9 +119,7 @@ return (
         />
       </Route>
       <Route exact path="/user/alarmpage">
-        <AlarmPage 
-          accessToken={accessToken} 
-        />
+        <AlarmPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
       </Route>
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
@@ -121,7 +127,7 @@ return (
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
         <Route path="/modified">
-          <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
+          <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken}/>
         </Route> 
         <Route 
           path="/product/:productId" 
@@ -129,6 +135,7 @@ return (
       </Switch>
       </ChakraProvider>
     </Router>    
+    
   );
 }
 export default App;

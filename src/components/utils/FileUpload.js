@@ -16,7 +16,7 @@ export default function FileUpload({ updateImages }) {
     }
     formData.append("file", files[0])
  
-    axios.post('https://localhost:4000/products/image', formData, config)
+    axios.post('https://projectb1:4000/products/image', formData, config)
       .then(response => {
         if(response.data.success){
            console.log("사진업로드", response.data)
@@ -60,7 +60,7 @@ export default function FileUpload({ updateImages }) {
         {images.map((image, index) => (
           <div onClick={()=> deleteHandler(image)} key={index}>
             <img style={{ minWidth: '300px', width:'300px', height: '240px' }}
-                 src={`https://localhost:4000/${image}`} />
+                 src={`https://projectb1.com:4000/${image}`} />
           </div>
         ))}
 

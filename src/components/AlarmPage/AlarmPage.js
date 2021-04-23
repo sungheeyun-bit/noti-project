@@ -12,6 +12,10 @@ function AlarmPage({ accessToken }) {
   const [leftDay, setLeftDay] = useState("")
   const [productName, setProductName] = useState("")
 
+  // const accessToken = window.localStorage.getItem('userToken')
+
+  console.log("알림페이지토큰", accessToken)
+
   useEffect(() => {
     axios
       .get("https://projectb1.com:4000/products/myList",{

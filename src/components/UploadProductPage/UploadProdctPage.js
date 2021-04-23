@@ -52,7 +52,7 @@ export default function UploadProdctPage() {
       images:images
     }
 
-    axios.post("https://localhost:4000/products/testadd", body)
+    axios.post("https://projectb1.com:4000/products/testadd", body)
       .then(response =>{
         console.log("add", response)
         if(response.data.success){
