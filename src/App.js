@@ -96,12 +96,12 @@ function App() {
   
 return (  
     <Router>
-     <ChakraProvider>
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
         isLogin={isLogin}      
       />
+      <ChakraProvider>
       <Switch>
       <Route exact path="/">
       <LandingPage 

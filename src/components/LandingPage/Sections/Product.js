@@ -26,9 +26,9 @@ export default function Product(props) {
 
   return ( 
     <HStack>
-    <Container maxW="sm">
+    <Container maxW="md">
              <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-             <AspectRatio maxW="600px" ratio={1}>
+             <AspectRatio maxW="400px" ratio={1}>
              <Image
             src={`https://projectb1.com:4000/${props.data.images[0]}`}/>
             </AspectRatio>

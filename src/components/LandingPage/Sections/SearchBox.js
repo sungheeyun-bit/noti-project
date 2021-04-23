@@ -16,9 +16,9 @@ export default function SearchBox({ updateSearchTerm }){
   return(
     <div>
       <Search 
-        placeholder="Search"
+        placeholder="예) nike"
         onChange={searchHandler}
-        style={{ width: 200}}
+        style={{ width: 324}}
         value={searchTerm}
       />
     </div>

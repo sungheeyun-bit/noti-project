@@ -26,7 +26,7 @@ export default function AlarmItem({ item, handleDelete, accessToken }) {
   return (
     <div>
       <div>
-        {<img src ={`https://projectb1.com:4000/${item.images}`}/>}
+        {<img src ={`https://projectb1.com:4000/${item.images[0]}`}/>}
         <h2>{item.releaseString}</h2>
         <h2>{item.productName}</h2>
           <Switch defaultChecked="true" 
