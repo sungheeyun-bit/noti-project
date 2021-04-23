@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import Toast from '../LandingPage/Sections/Toast'
 import AlarmItem from './Sections/AlarmItem';
+import { Switch, Button, HStack, Heading, Box, useColorModeValue,
+  VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem
+} from "@chakra-ui/react"
 
 function AlarmPage({ accessToken }) {
  
@@ -35,10 +38,26 @@ function AlarmPage({ accessToken }) {
 }
 
 return (
-  <div style={{ width: '85%', margin: '3rem auto' }}>
-    <h1>알림 리스트 페이지</h1>
-        <h2>{leftDay}일 뒤,</h2>
-        <h2>{productName}가 발매됩니다.</h2>
+  <Box
+    bg={useColorModeValue('gray.50', 'inherit')}
+    minH="100vh"
+    py="12"
+    px={{ base: '4', lg: '8' }}
+  >
+      <Box maxW="md" mx="auto">
+        <Heading
+          mb='8'
+          fontWeight='extrabold'
+          size='2xl'
+          bgGradient='linear(to-r, pink.500, pink.300, blue.500)'
+          color='purple'
+          bgClip='text'
+        >
+          {leftDay}일 뒤,
+          <br></br>
+          {productName}가 발매 됩니다.
+        </Heading>
+
           <div className="alarmList-container">
              {!alarmList.length ? (
                 <div className="alarmList-text">
@@ -48,17 +67,18 @@ return (
                   <div className="alarmList">
                     {alarmList.map((data, idx) => {
                       return <AlarmItem 
-                               key={idx}
-                               item={data}
-                               handleDelete={handleDelete}
-                               accessToken={accessToken}
-                           />
-                        })}
-                      </div>
+                        key={idx}
+                        item={data}
+                        handleDelete={handleDelete}
+                        accessToken={accessToken}
+                      />
+                      })}
+                    </div>
                     )}
-                </div>
             </div>
-        )
-    }
+        </Box>
+    </Box>
+  )
+}
 
 export default AlarmPage    

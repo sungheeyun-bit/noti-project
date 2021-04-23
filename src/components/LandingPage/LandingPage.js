@@ -108,6 +108,16 @@ export default function LandingPage(props) {
         handleClick={() => {props.addToCart(data._id)}}
         />)}
     </SimpleGrid>
+        <Text
+          fontSize="lg"
+          fontWeight="bold"
+          mt={2}
+          textAlign="center"
+          color="primary.800"
+          opacity="1"
+        >
+          🎉 최신 발매정보를 지속적으로 업데이트 하고 있어요!
+        </Text>
     </div>
     </HStack>        
   </div>

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 // import Modal from "./Modal"
 // import ModalButton from "./ModalButton";
 import styled from "styled-components";
-// import { Row, Col, Button } from 'antd';
-import { Button, Box, Image, AspectRatio, Badge, Container, Link, HStack } from "@chakra-ui/react"
+import { FaRegBookmark } from 'react-icons/fa';
+import { Button, Box, Image, AspectRatio, Badge, Container, Link, HStack, IconButton } from "@chakra-ui/react"
 // const ModalContent = styled.div`
 //   height: 100%;
 //   width: 100%;
@@ -47,6 +47,16 @@ export default function Product(props) {
                 isTruncated
                 >
                 {props.data.releaseString}
+
+                <IconButton
+                    icon={<FaRegBookmark />}
+                    size="md"
+                    variant="outline"
+                    isRound='true' 
+                    onClick={(e) => props.handleClick(e, props.data.ProductId)}
+                    >
+                    저장
+                </IconButton>
             </Box>
 
             <Box>
@@ -54,6 +64,8 @@ export default function Product(props) {
                 <Box as="span" color="gray.600" fontSize="md">
                 </Box>
             </Box>
+
+
             
             <Link
                 href={`/product/${props.data._id}`}
@@ -61,11 +73,7 @@ export default function Product(props) {
                  상세정보 확인하기
             </Link>
 
-            <Button 
-            onClick={(e) => props.handleClick(e, props.data.ProductId)}
-            >
-            저장
-            </Button>
+
 
                 {/* <ModalButton 
                 // handlClick={() => handlOpenModal(true)}

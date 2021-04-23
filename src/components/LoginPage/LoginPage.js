@@ -116,23 +116,23 @@ export default function LoginPage({ loginHandler }) {
           <FormControl id="email">
            <FormLabel>🔐 비밀번호</FormLabel>
               <Input onChange={(e) => setDetails({...details, password: e.target.value})}
-              value={details.password}
-              name="email" 
-              type="password"
-              placeholder="비밀번호를 입력해주세요."
-              autoComplete="email" required />
+                value={details.password}
+                name="email" 
+                type="password"
+                placeholder="비밀번호를 입력해주세요."
+                autoComplete="email" required />
            </FormControl>
 
            <SimpleGrid mt="6" columns={3} spacing="3"/>
-          <Button
-              onClick={submitHandler}  
-              type="submit" 
-              colorScheme="purple" 
-              // size="lg"
-              width="full"
-              fontSize="md">
-              이메일로 시작하기
-          </Button>
+            <Button
+                onClick={submitHandler}  
+                type="submit" 
+                colorScheme="purple" 
+                // size="lg"
+                width="full"
+                fontSize="md">
+                이메일로 시작하기
+            </Button>
 
           <SimpleGrid mt="6" columns={3} spacing="3"/>
           
