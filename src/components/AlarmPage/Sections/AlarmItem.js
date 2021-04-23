@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import axios from "axios";
-import { Switch, Button } from "@chakra-ui/react" 
+import { Switch, Button, HStack, Heading, Box,
+         VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem
+} from "@chakra-ui/react"
+import { FaTrash } from 'react-icons/fa';
 import swal from "sweetalert"; 
 
 
@@ -36,21 +39,39 @@ export default function AlarmItem({ item, handleDelete, accessToken}) {
           }        
        });
     }
-
-    // response.data.data.myList
   
   return (
-    <div>
-      <div>
-        {<img src ={`https://projectb1.com:4000/${item.images[0]}`}/>}
-        <h2>{item.releaseString}</h2>
-        <h2>{item.productName}</h2>
-        <Switch defaultChecked="true" 
-        onChange={alarmSetting}></Switch> 
-        <Button onClick={() => {handleDelete(item.productId)}}> 삭제 </Button>
-      </div>    
-    </div>
+      <VStack
+                divider={<StackDivider  mt="3" />}
+                borderColor='gray.100'
+                borderWidth='2px'
+                spacing={8}
+                p={4}
+                borderRadius='lg'
+                w='100%'
+                maxW={{ base: '120vw', sm: '100vw', lg: '50vw', xl: '40vw' }}
+                alignItems='stretch'
+                >
+                <HStack >
+                    <Wrap>
+                        <WrapItem>
+                        <Avatar size="xl" name="shoes" src={`https://projectb1.com:4000/${item.images[0]}`} />
+                        </WrapItem>
+                        <Box p={4} >
+                            <Heading fontSize="xl">{item.releaseString}</Heading>
+                            <Text mt={4}>{item.productName}</Text>
+                        </Box>
+                        <Spacer />
+                        <Switch defaultChecked="true"
+                         onChange={alarmSetting}></Switch>
+                        <IconButton
+                            icon={<FaTrash />}
+                            isRound='true'
+                            onClick={() => {handleDelete(item.productId)}}
+                        />
+                    </Wrap>
+                </HStack>
+      </VStack>
   )
-}
-
+};
  

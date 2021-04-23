@@ -3,8 +3,6 @@ import {
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
 } from '../_Actions/Types';
-
-
 export default function (state = {}, action) {
     switch (action.type) {
         case ADD_TO_CART:
@@ -17,9 +15,6 @@ export default function (state = {}, action) {
             }
         case GET_CART_ITEMS:
             return { ...state, cartDetail: action.payload }
-
-
-
         case REMOVE_CART_ITEM:
             return {
                 ...state, cartDetail: action.payload.productInfo,
