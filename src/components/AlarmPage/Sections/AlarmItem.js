@@ -4,10 +4,10 @@ import { Switch, Button } from "@chakra-ui/react"
 import swal from "sweetalert"; 
 
 
-export default function AlarmItem({ item, handleDelete}) {
+export default function AlarmItem({ item, handleDelete, accessToken}) {
 
 
-  const accessToken = window.localStorage.getItem('userToken')
+  // const accessToken = window.localStorage.getItem('userToken')
 
       const alarmSetting = (productId) => {
         

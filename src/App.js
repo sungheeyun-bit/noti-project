@@ -20,17 +20,25 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
 
   const loginHandler = (data) => {
     setIsLogin(true)
+    issueAccessToken(data.data);
   };
+
+  const issueAccessToken = (token) => {
+   setAccessToken(token);
+   console.log("토큰", token)  
+  }
 
   const handleLogout = () => {
     setIsLogin(false);
-    window.localStorage.removeItem("userToken")
+     setAccessToken("");
   }
 
-  const accessToken = window.localStorage.getItem("userToken")
+
+  console.log("토큰", accessToken)
   
   const [productList, setProductList] = useState([])
 
@@ -112,7 +120,7 @@ return (
         />
       </Route>
       <Route exact path="/user/alarmpage">
-        <AlarmPage/>
+        <AlarmPage accessToken={accessToken} issueAccessToken={issueAccessToken} />
       </Route>
         <Route exact path="/login">
           <LoginPage loginHandler={loginHandler} /> 
@@ -120,11 +128,11 @@ return (
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/product/upload" component={UploadProdctPage} />
         <Route path="/modified">
-          <ModifiedPage/>
+          <ModifiedPage accessToken={accessToken} issueAccessToken={issueAccessToken}/>
         </Route> 
         <Route 
           path="/product/:productId" 
-          render={(props) =>  <DetailProductPage {...props} />} />
+          render={(props) =>  <DetailProductPage accessToken={accessToken} {...props} />} />
       </Switch>
       </ChakraProvider>
     </Router>    

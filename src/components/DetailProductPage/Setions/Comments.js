@@ -10,7 +10,7 @@ import swal from "sweetalert";
 axios.defaults.withCredentials = true;
 
 export default function Comments(props) {
-  const accessToken = window.localStorage.getItem('userToken')
+  // const accessToken = window.localStorage.getItem('userToken')
 
   const [comment, setComment] = useState("")
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function Comments(props) {
       .post("https://projectb1.com:4000/products/writeComment", 
       body,
       {
-        headers: { "Content-Type": "application/json" , "okCome": accessToken}, 
+        headers: { "Content-Type": "application/json" , "okCome": props.accessToken}, 
       })
       .then(response => {
         console.log ("포스트", response.data)
@@ -92,6 +92,7 @@ export default function Comments(props) {
               comment={comment} 
               productId={props.productId} 
               updateLikes={props.updateLikes}
+              accessToken={props.accessToken}
             />
           ))}
         </div>  

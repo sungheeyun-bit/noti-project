@@ -18,11 +18,11 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 
-const accessToken = window.localStorage.getItem('userToken')
+// const accessToken = window.localStorage.getItem('userToken')
 
 axios.defaults.withCredentials = true;
 
-export default function ModifiedPage() {
+export default function ModifiedPage({accessToken}) {
   const [values, setValues] = useState({
     nickName: "",
     password: "",
