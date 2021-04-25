@@ -82,6 +82,7 @@ return (
                     mt="2"
                     >
                     {alarmList.map((data, idx) => {
+                      console.log("알람리스트", data)
                       return <AlarmItem 
                         key={idx}
                         item={data}

@@ -15,18 +15,25 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import AlarmPage from "./components/AlarmPage/AlarmPage";
 import axios from "axios";
 import swal from "sweetalert";
+
+
 axios.defaults.withCredentials = true;
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const loginHandler = (data) => {
     setIsLogin(true)
   };
+
   const handleLogout = () => {
     setIsLogin(false);
     window.localStorage.removeItem("userToken")
   }
+
   const accessToken = window.localStorage.getItem("userToken")
+  
   const [productList, setProductList] = useState([])
+  
   useEffect(() => {
     axios
       .get("https://projectb1.com:4000/products/filterProductList")
@@ -79,12 +86,12 @@ function App() {
         headers: {"Content-Type": "application/json"}
         })
         .then(response => {
+          console.log("서치", response)
           setProductList(response.data.data)
     })  
   }
 return (  
     <Router>
-     
       <Navbar 
         loginHandler={loginHandler}
         handleLogout={handleLogout}
@@ -114,8 +121,13 @@ return (
           path="/product/:productId" 
           render={(props) =>  <DetailProductPage {...props} />} />
       </Switch>
-      </ChakraProvider>
+      </ChakraProvider>      
     </Router>    
   );
 }
 export default App;
+
+
+
+
+

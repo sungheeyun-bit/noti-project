@@ -1,7 +1,25 @@
-/* .comments-wrapper{
+/* .container{
   max-width: 1200px;
   width: 100%;
   margin: 100px auto;
-  box-shadow: 0 0 5px #ccc;
-  border-radius: 30px;
+
+}
+
+.container {
+  background: #9046FF;
+  clip-path: circle(150px at 90% 20%);
+  transition: 0.5s ease-in-out;
+}
+
+.container:hover{
+  clip-path: circle(300px at 80% -20%);
+}
+
+.commentbox{
+  margin: 30px 110px;
+}
+
+
+form{
+  display: flex;
 } */

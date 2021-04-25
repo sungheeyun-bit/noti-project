@@ -9,7 +9,6 @@ import swal from "sweetalert";
 
 export default function AlarmItem({ item, handleDelete }) {
 
-
   const accessToken = window.localStorage.getItem('userToken')
 
       const alarmSetting = (productId) => {

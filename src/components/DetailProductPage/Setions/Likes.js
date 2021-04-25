@@ -35,12 +35,15 @@ export default function Likes(props) {
     })    
   }
   return (
-    <div className="like-icon">
-      <div onClick={onLikeClick}>
-        <span>{action=== 0 ? 
+    <div>
+      <div className="like-icon" style={{display: "flex"}} onClick={onLikeClick}>
+        {action=== 0 ? 
           <IoMdHeartEmpty  size="25"/> :
-          <IoMdHeart size="25" color="rgb(201, 89, 113)" />}</span>
-        <span className="like-count">{likeCount}</span>
+          <IoMdHeart size="25" color="rgb(201, 89, 113)" />}         
+        <span 
+          className="like-count"
+          style={{marginLeft: "5px"}}
+        >{likeCount}</span>
       </div>
     </div>
   )
