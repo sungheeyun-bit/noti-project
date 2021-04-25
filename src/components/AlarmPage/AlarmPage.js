@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import Toast from '../LandingPage/Sections/Toast'
 import AlarmItem from './Sections/AlarmItem';
-import { Switch, Button, HStack, Heading, Box, useColorModeValue,
+import { Switch, Button, HStack, Heading, Box, useColorModeValue, Flex,
   VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem
 } from "@chakra-ui/react"
 
-function AlarmPage({ accessToken }) {
+function AlarmPage() {
  
   const [alarmList, setAlarmList] = useState([])
   const [leftDay, setLeftDay] = useState("")
   const [productName, setProductName] = useState("")
 
-  // const accessToken = window.localStorage.getItem('userToken')
+  const accessToken = window.localStorage.getItem('userToken')
 
   console.log("알림페이지토큰", accessToken)
 
@@ -44,20 +44,21 @@ function AlarmPage({ accessToken }) {
 return (
   <Box
     bg={useColorModeValue('gray.50', 'inherit')}
-    minH="100vh"
+    minH="120vh"
     py="12"
-    px={{ base: '4', lg: '8' }}
+    px={{ base: '2', lg: '10' }}
   >
-      <Box maxW="md" mx="auto">
+    {/* <Flex> */}
+      <Box maxW="lg" mx="auto">
         <Heading
           mb='8'
           fontWeight='extrabold'
-          size='2xl'
-          bgGradient='linear(to-r, pink.500, pink.300, blue.500)'
+          size='xl'
+          bgGradient='linear(to-r, purple.500, purple.300, blue.500)'
           color='purple'
           bgClip='text'
         >
-          {leftDay}일 뒤,
+          👉 {leftDay}일 뒤,
           <br></br>
           {productName}가 발매 됩니다.
         </Heading>
@@ -65,10 +66,21 @@ return (
           <div className="alarmList-container">
              {!alarmList.length ? (
                 <div className="alarmList-text">
-                  알림리스트에 아이템이 없습니다.
+                  <Text
+                  fontWeight='extrabold'
+                  fontSize='xl'
+                  mt="24"
+                  align="center"
+                  >
+                  😥 알림리스트에 아이템이 없습니다. <br>
+                  </br>로그인 또는 제품을 저장해 주세요!</Text>
                 </div>
                 ) : (
-                  <div className="alarmList">
+                  // <div className="alarmList">
+                  // <Flex>
+                    <Box
+                    mt="2"
+                    >
                     {alarmList.map((data, idx) => {
                       return <AlarmItem 
                         key={idx}
@@ -77,10 +89,13 @@ return (
                         accessToken={accessToken}
                       />
                       })}
-                    </div>
+                      </Box>
+                  // </Flex>     
+                    // {/* </div> */}
                     )}
-            </div>
-        </Box>
+            </div>  
+          </Box>
+        {/* </Flex> */}
     </Box>
   )
 }

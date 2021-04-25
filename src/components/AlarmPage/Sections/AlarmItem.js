@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { Switch, Button, HStack, Heading, Box,
-         VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem
+         VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem, Flex
 } from "@chakra-ui/react"
 import { FaTrash } from 'react-icons/fa';
 import swal from "sweetalert"; 
 
 
-export default function AlarmItem({ item, handleDelete, accessToken}) {
+export default function AlarmItem({ item, handleDelete }) {
 
 
-  // const accessToken = window.localStorage.getItem('userToken')
+  const accessToken = window.localStorage.getItem('userToken')
 
       const alarmSetting = (productId) => {
         
@@ -41,37 +41,64 @@ export default function AlarmItem({ item, handleDelete, accessToken}) {
     }
   
   return (
+    // <Flex>
       <VStack
-                divider={<StackDivider  mt="3" />}
-                borderColor='gray.100'
-                borderWidth='2px'
-                spacing={8}
-                p={4}
-                borderRadius='lg'
-                w='100%'
-                maxW={{ base: '120vw', sm: '100vw', lg: '50vw', xl: '40vw' }}
-                alignItems='stretch'
-                >
-                <HStack >
-                    <Wrap>
-                        <WrapItem>
-                        <Avatar size="xl" name="shoes" src={`https://projectb1.com:4000/${item.images[0]}`} />
-                        </WrapItem>
-                        <Box p={4} >
-                            <Heading fontSize="xl">{item.releaseString}</Heading>
-                            <Text mt={4}>{item.productName}</Text>
-                        </Box>
-                        <Spacer />
-                        <Switch defaultChecked="true"
-                         onChange={alarmSetting}></Switch>
-                        <IconButton
-                            icon={<FaTrash />}
-                            isRound='true'
-                            onClick={() => {handleDelete(item.productId)}}
-                        />
-                    </Wrap>
-                </HStack>
+        divider={<StackDivider  mt="6" />}
+        borderColor='black.400'
+        borderWidth='1px'
+        spacing={16}
+        p={4}
+        borderRadius='2xl'
+        w='100%'
+        maxW={{ base: '100vw', sm: '100vw', lg: '50vw', xl: '40vw' }}
+        alignItems='stretch'
+        shadow="xs"
+        bg="white"
+        mt="8"
+      >
+        {/* <Flex> */}
+        <HStack mt="0">
+          <Avatar ml="0" mr="4" size="lg" name="shoes" src={`https://projectb1.com:4000/${item.images[0]}`} />
+            {/* <Flex> */}
+            <Box
+              alignContent="space-between"
+              fontSize="lg"
+              fontWeight="semibold"
+              as="h3"
+              lineHeight="1.5"
+              isTruncated
+              ml="8"
+            >
+              <Spacer />
+              <Flex>
+              <Box>
+                    {item.releaseString}
+
+              <Switch 
+                    ml="4"
+                    defaultChecked="true"
+                    onChange={alarmSetting}>
+              </Switch>
+              
+              <IconButton
+              ml="2"
+              size="md"
+              alignContent="space-between"
+              icon={<FaTrash />}
+              isRound='true'
+              onClick={() => {handleDelete(item.productId)}}
+            />
+            </Box>
+            </Flex>
+
+            <Box fontSize="md" fontWeight="light" mt={0} ml={0}>{item.productName} <Box as="span" color="gray.600" fontSize="md"> </Box></Box>
+            </Box>
+            
+        {/* </Flex> */}
+        </HStack>
+        {/* </Flex> */}
       </VStack>
+      // </Flex>
   )
 };
  
