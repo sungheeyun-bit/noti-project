@@ -85,7 +85,9 @@ export default function LandingPage(props) {
       </Box>
     </Flex>
 
+    {/* <div style={{ display: "flex", justifyContent:"flex-end", margin:"1rem auto"}}> */}
     <SearchBox updateSearchTerm={props.updateSearchTerm} />
+    {/* </div> */}
       <br />
       <Text
           fontSize="3xl"

@@ -6,17 +6,19 @@ axios.defaults.withCredentials = true;
 
 export default function FileUpload({ updateImages }) {
 
+  const accessToken = window.localStorage.getItem('userToken')
+
   const [images, setImages] = useState([])
  
   const dropHandler = (files) => {
      
     let formData = new FormData();
     const config = {
-      header: {'Content-Type': 'multipart/form-data'}
+      header: {'Content-Type': 'multipart/form-data', "okCome": accessToken}
     }
     formData.append("file", files[0])
  
-    axios.post('https://projectb1:4000/products/image', formData, config)
+    axios.post('https://projectb1:4000.com/products/image', formData, config)
       .then(response => {
         if(response.data.success){
            console.log("사진업로드", response.data)
@@ -27,8 +29,6 @@ export default function FileUpload({ updateImages }) {
         }
       })
   }
-
-
 
   const deleteHandler = (image) => {
     const currentIndex = images.indexOf(image)

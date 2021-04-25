@@ -14,7 +14,8 @@ export default function UploadProdctPage() {
   const [price, setPrice] = useState(0);
   const [releaseDate, setReleaseDate] = useState(null);
   const [images, setImages] = useState([]);
-  
+
+  const accessToken = window.localStorage.getItem('userToken')
   
   const productNameChangeHandler = (e) => {
     setProductName(e.target.value)
@@ -49,10 +50,12 @@ export default function UploadProdctPage() {
       brand: brand,
       price: price,
       releaseDate: releaseDate,
-      images:images
+      images:images,
     }
 
-    axios.post("https://projectb1.com:4000/products/testadd", body)
+    axios.post("https://projectb1.com:4000/products/testadd", body, {
+       headers: {"okCome": accessToken}
+    })
       .then(response =>{
         console.log("add", response)
         if(response.data.success){

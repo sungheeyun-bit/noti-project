@@ -5,6 +5,8 @@ import './Comments.css'
 import { IconButton, Input } from "@chakra-ui/react"
 import { ChatIcon } from '@chakra-ui/icons'
 import swal from "sweetalert";
+
+
 axios.defaults.withCredentials = true;
 export default function Comments(props) {
   const accessToken = window.localStorage.getItem('userToken')
@@ -53,15 +55,13 @@ export default function Comments(props) {
       <div className="container" 
       style={{ maxWidth:"1200px", 
                width:"100%", 
-               margin:"100px auto",
-               boxShadow:"0 0 5px #ccc",
-               borderRadius:"30px",
+               margin:"100px auto",             
               }}> 
       <br />
+   
       <div className="commentbox" style={{margin:"30px 110px"}}> 
       {/* <p> replies</p> */}
-        <form style={{ display: "flex" }} onSubmit={onSubmit}>
-          <br />
+        <form style={{ display: "flex" }} onSubmit={onSubmit}>         
           <Input 
             focusBorderColor="purple.400"
             variant="outline" 

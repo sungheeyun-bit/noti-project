@@ -46,8 +46,8 @@ export default function LoginPage({ loginHandler }) {
       window.localStorage.setItem("userToken", res.data.data )
     })
     .catch(err => {
-      console.log(err.message);
-      alert(err.message)
+      console.log("에러", err);
+      swal("Oops", err.message , "error");
     })
   }
   const handleLoginSuccess = (response) => {
