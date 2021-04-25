@@ -8,7 +8,8 @@ export default function SingleComment(props) {
     <div className="comment-list" 
          style={{ 
           boxShadow:"0 0 3px #ccc",
-          margin:"30px 110px", 
+          margin:"30px 16px",
+          marginBottom:"16px",
           display:"block",
           borderRadius: "30px"
         }}>  
@@ -16,6 +17,7 @@ export default function SingleComment(props) {
       <li className="comment" 
           style={{
             listStyle: "none", 
+            marginBottom:"16px",
             display:"flex", 
             alignItems:"center",
             height: "30px",
