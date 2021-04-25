@@ -6,13 +6,13 @@ import { Switch, Button, HStack, Heading, Box, useColorModeValue,
   VStack, Text, IconButton, StackDivider, Spacer, Badge, Avatar, Wrap, WrapItem
 } from "@chakra-ui/react"
 
-function AlarmPage({ accessToken }) {
+function AlarmPage() {
  
   const [alarmList, setAlarmList] = useState([])
   const [leftDay, setLeftDay] = useState("")
   const [productName, setProductName] = useState("")
 
-  // const accessToken = window.localStorage.getItem('userToken')
+  const accessToken = window.localStorage.getItem('userToken')
 
   console.log("알림페이지토큰", accessToken)
 
