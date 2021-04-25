@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Link, Image } from "@chakra-ui/react"
 import { useHistory } from "react-router-dom";
 import "../../Navbar.css";
-import Logo from "../../assets/Icon.svg"
+import Logo from "../../assets/Icon.png"
 export default function Navbar({ loginHandler, handleLogout, isLogin, alarmList }){
   const [click, setClick] = useState(false);
 

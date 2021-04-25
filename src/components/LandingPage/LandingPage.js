@@ -111,7 +111,7 @@ export default function LandingPage(props) {
       
     <HStack>
     <div style={{ width: '100%', margin: '2rem auto' }}>
-    <SimpleGrid columns={[1, 5]} spacing="36px">
+    <SimpleGrid columns={[1, 5]} spacing="24px">
         {props.productList.map((data, index) => 
     <Product 
         data={data} 

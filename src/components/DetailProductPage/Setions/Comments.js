@@ -2,11 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import SingleComment from './SingleComment';
 import './Comments.css'
-import { IconButton, Input, Flex, Box } from "@chakra-ui/react"
+import { Box, IconButton, Input, Flex } from "@chakra-ui/react"
 import { ChatIcon } from '@chakra-ui/icons'
 import swal from "sweetalert";
-
-
 axios.defaults.withCredentials = true;
 export default function Comments(props) {
   const accessToken = window.localStorage.getItem('userToken')
@@ -51,20 +49,28 @@ export default function Comments(props) {
     })
   }
   return (
-    
-      <Flex>
-      <div className="commentbox" style={{margin:"30px 110px"}}> 
+    <div> 
+      <div className="container" 
+      style={{ maxWidth:"1400px", 
+               width:"100%", 
+               margin:"100px auto",             
+              }}> 
+      <br />
+      <div className="commentbox" style={{margin:"30px 16px"}}> 
+      {/* <p> replies</p> */}
         <form style={{ display: "flex" }} onSubmit={onSubmit}>         
-          <Input 
+          <Input
+            mb="16"
             focusBorderColor="purple.400"
             variant="outline" 
-            placeholder="로그인 후 코멘트를 작성할 수 있습니다."
+            placeholder="로그인 후 이용할 수 있어요!"
             onChange={handleChange}
             value={comment}
             size="lg"
           />
           <IconButton
-            ml="4"
+            mb="16"
+            marginLeft="16px"
             onClick={onSubmit}
             colorScheme="purple"
             aria-label="submit"
@@ -73,21 +79,15 @@ export default function Comments(props) {
          />
         </form>
       </div>
-      <Flex>
-      <Box p="2">
         {props.commentLists && props.commentLists.map((comment, index) => (
-            <SingleComment 
+            <SingleComment
               key={index}
               comment={comment} 
               productId={props.productId} 
               updateLikes={props.updateLikes}
             />
           ))}
-      </Box>
-
-
-      </Flex>
-        
-      </Flex>
+        </div> 
+    </div>
   )
 }

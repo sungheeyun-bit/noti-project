@@ -36,7 +36,6 @@ export default function Product(props) {
                 
 
              <Image
-            
                 src={`https://projectb1.com:4000/${props.data.images[0]}`}/>
             </Link>
             </AspectRatio>

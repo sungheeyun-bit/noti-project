@@ -124,6 +124,20 @@ export default function LoginPage({ loginHandler }) {
               fontSize="md">
               이메일로 시작하기
           </Button>
+          <Link
+            href="/signup"
+          >
+          <Button
+              variant="outline"
+              mt="4"
+              href="/signup"
+              type="submit" 
+              colorScheme="purple" 
+              width="full"
+              fontSize="md">
+              회원가입 하기
+          </Button>
+          </Link>
           <SimpleGrid mt="6" columns={3} spacing="3"/>
           <GoogleLogin
             buttonSize="320px"
@@ -134,14 +148,6 @@ export default function LoginPage({ loginHandler }) {
             onFailure={handleLoginFailure}
             cookiePolicy={"single_host_origin"}
           />
-          <Text>
-          아직 계정이 없으신가요?{" "}
-            <Link 
-            color="purple" 
-            href="/signup">
-            👉 회원가입하기
-            </Link>
-          </Text>
       </Card>    
     </Box>
     </Box>

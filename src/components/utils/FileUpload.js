@@ -14,11 +14,10 @@ export default function FileUpload({ updateImages }) {
      
     let formData = new FormData();
     const config = {
-      header: {'Content-Type': 'multipart/form-data', "okCome": accessToken}
+      headers: {'Content-Type': 'multipart/form-data', "okCome": accessToken}
     }
     formData.append("file", files[0])
- 
-    axios.post('https://projectb1:4000.com/products/image', formData, config)
+    axios.post('https://projectb1.com:4000/products/image', formData, config)
       .then(response => {
         if(response.data.success){
            console.log("사진업로드", response.data)
