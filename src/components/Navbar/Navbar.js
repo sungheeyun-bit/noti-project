@@ -1,29 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Button, Link, Image } from "@chakra-ui/react"
+import { useHistory } from "react-router-dom";
 import "../../Navbar.css";
-
-
-export default function Navbar({ handleLogout, isLogin}){
+import Logo from "../../assets/Icon.svg"
+export default function Navbar({ loginHandler, handleLogout, isLogin, alarmList }){
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
 
   return(
-    <>
-      <nav className="navbar">
         <div className="nav-container">
+        
           <Link 
-            exact to="/"
+            href="/"
             className="nav-logo"
             style={{textDecoration: "none", color: "black"}}>
-            NOTI
+            <Image 
+            boxSize="48px"
+            src={Logo}
+            >
+            </Image>
           </Link>     
           <ul className={click ? "nav-menu active" : "nav-menu"}>
              {isLogin ? (
             <>
               <li className="nav-item">
-                <Link 
-                  exact to="/"
+                <Link href="/"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -32,7 +34,7 @@ export default function Navbar({ handleLogout, isLogin}){
                 </Link>
               </li>
               <li className="nav-item">
-                <Link exact to="/user/alarmpage"
+                <Link href="/user/alarmpage"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -41,7 +43,7 @@ export default function Navbar({ handleLogout, isLogin}){
                 </Link>
               </li>           
               <li className="nav-item">
-                <Link exact to="/modified"
+                <Link href="/modified"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -51,7 +53,7 @@ export default function Navbar({ handleLogout, isLogin}){
               </li>           
               <li className="nav-item">
                 <Link 
-                  exact to="/"
+                  href="/"
                   onClick={handleLogout}
                   activeClassName="active"
                   className="nav-links"
@@ -67,7 +69,7 @@ export default function Navbar({ handleLogout, isLogin}){
              ) : (
             <>
               <li className="nav-item">
-                <Link exact to="/"
+                <Link href="/"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -76,7 +78,7 @@ export default function Navbar({ handleLogout, isLogin}){
                 </Link>
               </li>              
               <li className="nav-item">
-                <Link exact to="/login"
+                <Link href="/login"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -91,17 +93,5 @@ export default function Navbar({ handleLogout, isLogin}){
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
           </div> 
         </div>
-      </nav>
-    </>
   );
 }
-
-
-
-
-
-
-
-
-
-

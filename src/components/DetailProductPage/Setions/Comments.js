@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import SingleComment from './SingleComment';
 import './Comments.css'
-import { IconButton, Input } from "@chakra-ui/react"
+import { IconButton, Input, Flex, Box } from "@chakra-ui/react"
 import { ChatIcon } from '@chakra-ui/icons'
 import swal from "sweetalert";
 
@@ -51,16 +51,9 @@ export default function Comments(props) {
     })
   }
   return (
-    <div> 
-      <div className="container" 
-      style={{ maxWidth:"1200px", 
-               width:"100%", 
-               margin:"100px auto",             
-              }}> 
-      <br />
-   
+    
+      <Flex>
       <div className="commentbox" style={{margin:"30px 110px"}}> 
-      {/* <p> replies</p> */}
         <form style={{ display: "flex" }} onSubmit={onSubmit}>         
           <Input 
             focusBorderColor="purple.400"
@@ -71,6 +64,7 @@ export default function Comments(props) {
             size="lg"
           />
           <IconButton
+            ml="4"
             onClick={onSubmit}
             colorScheme="purple"
             aria-label="submit"
@@ -79,7 +73,8 @@ export default function Comments(props) {
          />
         </form>
       </div>
-      {/* comment lists */}
+      <Flex>
+      <Box p="2">
         {props.commentLists && props.commentLists.map((comment, index) => (
             <SingleComment 
               key={index}
@@ -88,7 +83,11 @@ export default function Comments(props) {
               updateLikes={props.updateLikes}
             />
           ))}
-        </div>  
-    </div>
+      </Box>
+
+
+      </Flex>
+        
+      </Flex>
   )
 }

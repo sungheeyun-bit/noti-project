@@ -18,17 +18,18 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 
-// const accessToken = window.localStorage.getItem('userToken')
+
 
 axios.defaults.withCredentials = true;
 
-export default function ModifiedPage({accessToken}) {
+export default function ModifiedPage() {
   const [values, setValues] = useState({
     nickName: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
+  const accessToken = window.localStorage.getItem('userToken')
   const handleChange = (key) => (e) => {
     setValues({
       ...values,
@@ -55,20 +56,20 @@ export default function ModifiedPage({accessToken}) {
         {
           headers: {
               "okCome":accessToken,
-            "Content-Type": "application/json",
+              "Content-Type": "application/json",
           },
         }
       )
       .then((res) => {
         if (res.status === 200) {
-            console.log(res.data)
+            console.log("성공하면 홈으로 이동", res.data)
            history.push("/");
         }
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        console.log("중복되면 띄워주기", err.response.data.message);
         swal("Oops", 'duplicated nickName', "error")
-        history.push("/login");
+        history.push("/");
       });
   };
   

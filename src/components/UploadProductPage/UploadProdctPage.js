@@ -59,7 +59,6 @@ export default function UploadProdctPage() {
       .then(response =>{
         console.log("add", response)
         if(response.data.success){
-        
           alert('상품 업로드에 성공 했습니다')
         } else {
           alert('상품 업로드에 실패 했습니다')

@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchBox from "./Sections/SearchBox";
 import Product from './Sections/Product';
+import FeatureOutro from "./Sections/FeatureOutro"
 import { Box, Container, HStack,
   Button,
   Flex,
@@ -8,9 +9,12 @@ import { Box, Container, HStack,
   Heading,
   Stack,
   Text,
-  Link, 
+  Link,
+  Tooltip,
 } from "@chakra-ui/react"
 import LandingCard from "./Sections/LandingCard";
+import Footer from "./Sections/Footer";
+import HowToUse from "./Sections/HowToUse";
 
 
 export default function LandingPage(props) {    
@@ -22,8 +26,8 @@ export default function LandingPage(props) {
       direction={{ base: "column-reverse", md: "row" }}
       wrap="no-wrap"
       minH="100vh"
-      px={6}
-      mb={10}
+      px={0}
+      mb={16}
       // {...rest}
     >
       <Stack
@@ -54,7 +58,7 @@ export default function LandingPage(props) {
           꼭 갖고 싶은 아이템 놓치지 않도록 NOTI로 미리 알림 설정 하시면 발매 하루 전 이메일로 발매 정보를 다시 알려 드립니다.
         </Heading>
 
-        <Link href="/login">
+        <Link href="/user/alarmpage">
           <Button
             colorScheme="purple"
             borderRadius="8px"
@@ -80,17 +84,22 @@ export default function LandingPage(props) {
       <Box w={{ base: "100%", sm: "60%", md: "40%" }} mb={{ base: 12, md: 0 }}>
         <LandingCard>
         {/* <Image src size="100%" rounded="1rem" shadow="2xl" /> */}
-        
         </LandingCard>
       </Box>
     </Flex>
+    <HowToUse>
 
-    {/* <div style={{ display: "flex", justifyContent:"flex-end", margin:"1rem auto"}}> */}
+    </HowToUse>
+    {/* <Flex> */}
+    <div style={{ display: "flex", justifyContent:"flex-start"}}>
+    <Tooltip label="원하는 제품을 검색해 보세요!" aria-label="A tooltip">
     <SearchBox updateSearchTerm={props.updateSearchTerm} />
-    {/* </div> */}
+    </Tooltip>
+    </div>
+    {/* </Flex> */}
       <br />
       <Text
-          fontSize="3xl"
+          fontSize="2xl"
           fontWeight="bold"
           mt={2}
           textAlign="left"
@@ -102,7 +111,7 @@ export default function LandingPage(props) {
       
     <HStack>
     <div style={{ width: '100%', margin: '2rem auto' }}>
-    <SimpleGrid columns={[2, null, 5]} spacing="36px">
+    <SimpleGrid columns={[1, 5]} spacing="36px">
         {props.productList.map((data, index) => 
     <Product 
         data={data} 
@@ -113,15 +122,18 @@ export default function LandingPage(props) {
         <Text
           fontSize="lg"
           fontWeight="bold"
-          mt={2}
+          mt={16}
           textAlign="center"
           color="primary.800"
           opacity="1"
         >
-          🎉 최신 발매정보를 지속적으로 업데이트 하고 있어요!
         </Text>
     </div>
-    </HStack>        
+    </HStack>
+    <FeatureOutro>
+
+    </FeatureOutro>
+    <Footer></Footer>
   </div>
   )
 }
