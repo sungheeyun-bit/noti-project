@@ -1,5 +1,8 @@
 # NOTI-PROJECT TEAM-PB
 
+![Noti_Logo](https://user-images.githubusercontent.com/40348689/116185242-2edd0a80-a75c-11eb-80ac-f7e63af3798b.png)
+
+
 ------------------------------------------------------------------------
 
 ## 프로젝트 명칭
