@@ -22,14 +22,14 @@ NOTI: NOTI는 NOTIFY의 줄임말로 사전에 발매정보를 알려주는 알�
 
 ![NOTI_PT (3)](https://user-images.githubusercontent.com/40348689/116185796-4963b380-a75d-11eb-9793-244436daf05c.png)
 
-### Node, Npm version
+## Node, Npm version
 
 + npm
   + version 7.7.6
 + node
   + version 15.13.0
  
-### Npm start
+## Npm start
 
 
 
