@@ -35,9 +35,9 @@ NOTI: NOTI는 NOTIFY의 줄임말로 사전에 발매정보를 알려주는 알�
 
 npm install
 npm run start
-```
 
 ## 🔨 프로젝트 플로우 차트
+
 ![image](https://user-images.githubusercontent.com/40348689/116186015-c0994780-a75d-11eb-9c91-b06002a6ef90.png)
 
 ## 🧐 팀 소개
