@@ -44,6 +44,6 @@ npm run start
 
 ![NOTI_PT (4)](https://user-images.githubusercontent.com/40348689/116186243-36051800-a75e-11eb-9bb4-b3164cf96f8d.png)
 
-## 프로젝트 상세 정보
+## 🚩 프로젝트 상세 정보
 
 https://github.com/codestates/noti-client/wiki
