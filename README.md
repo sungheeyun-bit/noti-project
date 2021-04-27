@@ -9,6 +9,10 @@
 
 NOTI: NOTI는 NOTIFY의 줄임말로 사전에 발매정보를 알려주는 알림 서비스를 뜻합니다.
 
+## 🚩 프로젝트 배포 링크
+
+https://pb.projectb1.com/
+
 ## 🔥 프로젝트 소개 및 목적
 
 발매 정보를 알려주는 사이트는 많지만 정보들이 파편화돼 있으며 발매 당일 구매 기회를 놓치는 문제가 많다는 점을 발견하였습니다. 개인의 취향에 따라 꼭 갖고 싶은 아이템 놓치기 않기 위해 발매 정보를 모아 알려주고 관리 할 수 있는 서비스입니다.
@@ -47,3 +51,8 @@ npm run start
 ## 🚩 프로젝트 상세 정보
 
 https://github.com/codestates/noti-client/wiki
+
+## 🚩 프로젝트 발표 자료
+
+https://docs.google.com/presentation/d/1aXiPkb0Tsn2_pFjFdm5xKuDiuN6kjQdUWr7P_tC68RA/edit#slide=id.gd06e5883d2_0_18
+
