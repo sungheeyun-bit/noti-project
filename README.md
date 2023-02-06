@@ -11,7 +11,7 @@ NOTI: NOTI는 NOTIFY의 줄임말로 사전에 발매정보를 알려주는 알�
 
 ## 프로젝트 배포 링크
 
-https://pb.projectb1.com/
+https://noti-alarm.netlify.app
 
 ## 프로젝트 소개 및 목적
 
@@ -34,8 +34,6 @@ https://pb.projectb1.com/
   + version 15.13.0
  
 ## Npm start
-
-
 
 npm install
 npm run start
