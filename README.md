@@ -1,4 +1,4 @@
-# NOTI-PROJECT
+# NOTI-PROJECT TEAM-PB
 
 ![Noti_Logo](https://user-images.githubusercontent.com/40348689/116185242-2edd0a80-a75c-11eb-80ac-f7e63af3798b.png)
 
@@ -11,8 +11,7 @@ NOTI: NOTI는 NOTIFY의 줄임말로 사전에 발매정보를 알려주는 알�
 
 ## 프로젝트 배포 링크
 
-https://project1.com
-
+https://pb.projectb1.com/
 
 ## 프로젝트 소개 및 목적
 
@@ -30,9 +29,9 @@ https://project1.com
 ## Node, Npm version
 
 + npm
-  + version 8.9.0
+  + version 7.7.6
 + node
-  + version 16
+  + version 15.13.0
  
 ## Npm start
 
@@ -56,4 +55,3 @@ https://github.com/codestates/noti-client/wiki
 ## 프로젝트 발표 자료
 
 https://docs.google.com/presentation/d/1aXiPkb0Tsn2_pFjFdm5xKuDiuN6kjQdUWr7P_tC68RA/edit#slide=id.gd06e5883d2_0_18
-
